@@ -8,7 +8,9 @@ public class MainMenuButton : MonoBehaviour
     public GameObject howPlayGrayWindow, optionGrayWindow;
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        // 이거 왜 이 함수 쓰셨죠...?
+        // BattleRound1으로 안넘어가서 주석 처리 해놓았습니다.
+        //DontDestroyOnLoad(gameObject);
     }
     public void SelectGameStartButton()
     {
