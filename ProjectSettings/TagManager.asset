@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackgroundUI
+    uniqueID: 3225975891
+    locked: 0
+  - name: Object
+    uniqueID: 950115481
+    locked: 0
+  - name: InfoUI
+    uniqueID: 3802584407
+    locked: 0
+  - name: WindowUI
+    uniqueID: 2659205775
+    locked: 0

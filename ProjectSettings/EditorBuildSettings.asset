@@ -10,8 +10,8 @@ EditorBuildSettings:
     guid: 283e383640016584c97be042465befae
   - enabled: 1
     path: Assets/Scenes/BattleRound1.unity
-    guid: c539c45b48480574997c2fbb46fea339
+    guid: ce3be172cbdb5bb41b5eec019c57977e
   - enabled: 1
     path: Assets/Scenes/BattleRound2.unity
-    guid: ce3be172cbdb5bb41b5eec019c57977e
+    guid: c539c45b48480574997c2fbb46fea339
   m_configObjects: {}
