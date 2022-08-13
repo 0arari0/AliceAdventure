@@ -7,6 +7,7 @@ public class PlayerAttackPrefab : MonoBehaviour
     const int destroyTime = 4;
     [SerializeField] int damage = 1;
     [SerializeField] float moveSpeed = 500f;
+    public int Damage { get { return damage; } }
 
     void Start()
     {

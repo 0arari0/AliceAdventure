@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
-        GameObject obj = Instantiate(attackPrefab, gameObject.transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(attackPrefab, gameObject.transform.position + new Vector3(0, 42, 0), Quaternion.identity);
         obj.GetComponent<PlayerAttackPrefab>().SetDamage(playerDamage);
     }
 

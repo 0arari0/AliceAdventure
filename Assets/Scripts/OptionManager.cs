@@ -20,7 +20,7 @@ public class OptionManager : MonoBehaviour
     void Start()
     {
         // 여러 씬에서 옵션창을 사용할 수 있어야하므로 파괴되지 않도록 설정하였다.
-        // AddListener 를 사용하여 bgmSlider, sfxSlider 의 value 가 변하면 자동으로 특정 함수를 실행하도록 설정하였다.
+        // AddListener 를 사용하여 bgmSlider, sfxSlider 의 value 가 변하면 BGM, SFX 볼륨조절 함수를 실행하도록 설정하였다.
         DontDestroyOnLoad(this.gameObject);
         bgmSlider.onValueChanged.AddListener(delegate { SetBgmVolumeValue(); });
         sfxSlider.onValueChanged.AddListener(delegate { SetSfxVolumeValue(); });
@@ -52,7 +52,7 @@ public class OptionManager : MonoBehaviour
         optionWindow.SetActive(false);
     }
 
-    public void SelectOptionWIndowOpen()
+    public void SelectOptionWindowOpen()
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         optionGrayWindow.SetActive(true);

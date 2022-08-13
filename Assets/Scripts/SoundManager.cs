@@ -22,7 +22,7 @@ public class SoundManager : MonoBehaviour
     }
     public enum SFX_Name_
     {
-        ButtonClick
+        ButtonClick, EnemyAttacked, EnemyDead
     }
     void Awake()
     {
