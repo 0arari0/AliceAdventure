@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class OptionManager : MonoBehaviour
 {
     /* 20220811 작성자 : 김두현
-     * 
+     * 배틀씬에서 esc를 누르면 옵션창을 띄우기위한 스크립트
      */
 
     public GameObject optionWindow;
@@ -50,5 +50,12 @@ public class OptionManager : MonoBehaviour
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         optionGrayWindow.SetActive(false);
         optionWindow.SetActive(false);
+    }
+
+    public void SelectOptionWIndowOpen()
+    {
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        optionGrayWindow.SetActive(true);
+        optionWindow.SetActive(true);
     }
 }

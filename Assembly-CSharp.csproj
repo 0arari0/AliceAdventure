@@ -61,7 +61,7 @@
      <Compile Include="Assets\Scripts\PlayerAttackPrefab.cs" />
      <Compile Include="Assets\Scripts\SetResolutionTest.cs" />
      <Compile Include="Assets\Scripts\SoundManager.cs" />
-     <None Include="Assets\Resources\ARA\Ara.txt" />
+     <None Include="Assets\Resources\ARA\ARA.txt" />
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>C:/Users/nada9/Documents/AliceAdventure/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
