@@ -10,7 +10,7 @@ public class MainMenuButton : MonoBehaviour
     {
         // 메인 메뉴에서 게임 시작 버튼 눌렀을 때 실행
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
-        SceneManager.LoadScene("BattleRound1");
+        SceneManager.LoadScene("BattleRound2");
     }
 
     public void SelectHowPlayButton()

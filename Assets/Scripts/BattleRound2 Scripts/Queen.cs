@@ -11,6 +11,7 @@ public class Queen : MonoBehaviour, IMove
     /// </summary>
 
     Move scriptMove;
+    QueenAttack scriptQueenAttack;
 
     Coroutine corMovePattern; // 움직임 전체 코루틴
     Coroutine corCurPattern; // 현재 움직임 코루틴
@@ -19,8 +20,8 @@ public class Queen : MonoBehaviour, IMove
     Vector2 enterStartPos; // 등장 시작 지점
     [SerializeField]
     Vector2 enterEndPos; // 등장 마지막 지점
-    Vector2 movableLimitUpRight = new Vector2(2.4f, 4.4f); // 여왕이 화면 내를 움직일 수 있는 범위 우상단 한도
-    Vector2 movableLimitBottomDown = new Vector2(-2.4f, 1.5f); // 여왕이 화면 내를 움직일 수 있는 범위 좌하단 한도
+    Vector2 movableLimitUpRight = new Vector2(220f, 420f); // 여왕이 화면 내를 움직일 수 있는 범위 우상단 한도
+    Vector2 movableLimitBottomDown = new Vector2(-220f, 150f); // 여왕이 화면 내를 움직일 수 있는 범위 좌하단 한도
 
     bool isAlive;
     [SerializeField]
@@ -49,6 +50,7 @@ public class Queen : MonoBehaviour, IMove
     void ConnectComponent()
     {
         scriptMove = GetComponent<Move>();
+        scriptQueenAttack = GetComponent<QueenAttack>();
     }
 
     Vector2 GetRandomMovablePosition()
@@ -66,11 +68,11 @@ public class Queen : MonoBehaviour, IMove
     /// <returns></returns>
     public IEnumerator ObjectMove(Vector2 initPos)
     {
-        if (isAlive)
-            yield return corCurPattern = StartCoroutine(scriptMove.MoveAtoB(initPos, enterEndPos));
+        yield return corCurPattern = StartCoroutine(scriptMove.MoveAtoB(initPos, enterEndPos));
+        scriptQueenAttack.AttackStart();
 
         // 화면 돌아다님
-        while (isAlive)
+        while (true)
         {
             yield return new WaitForSeconds(Random.Range(2f, 4f));
             Vector2 start = scriptMove.GetPosition();

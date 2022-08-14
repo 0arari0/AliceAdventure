@@ -7,6 +7,9 @@ TagManager:
   - PlayerAttack
   - Item
   - Soldier
+  - Enemy
+  - Wall
+  - QueenBullet
   layers:
   - Default
   - TransparentFX

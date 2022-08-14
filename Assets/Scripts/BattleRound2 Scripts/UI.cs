@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -19,5 +20,13 @@ public class UI : MonoBehaviour
     {
         Time.timeScale = 1f;
         panelPause.SetActive(false);
+    }
+    public void OnClickOption()
+    {
+        OptionManager.instance.SelectOptionWindowOpen();
+    }
+    public void OnClickExit()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

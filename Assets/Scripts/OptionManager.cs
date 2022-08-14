@@ -9,7 +9,7 @@ public class OptionManager : MonoBehaviour
     /* 20220811 작성자 : 김두현
      * 배틀씬에서 esc를 누르면 옵션창을 띄우기위한 스크립트
      */
-
+    public static OptionManager instance;
     public GameObject optionWindow;
     public GameObject optionGrayWindow;
     public Slider bgmSlider;
@@ -17,11 +17,12 @@ public class OptionManager : MonoBehaviour
     public Slider sfxSlider;
     public Text sfxValueText;
     bool isBattleScene = false;
-    void Start()
+
+    void Awake()
     {
         // 여러 씬에서 옵션창을 사용할 수 있어야하므로 파괴되지 않도록 설정하였다.
         // AddListener 를 사용하여 bgmSlider, sfxSlider 의 value 가 변하면 BGM, SFX 볼륨조절 함수를 실행하도록 설정하였다.
-        DontDestroyOnLoad(this.gameObject);
+        ApplySingletonPattern();
         bgmSlider.onValueChanged.AddListener(delegate { SetBgmVolumeValue(); });
         sfxSlider.onValueChanged.AddListener(delegate { SetSfxVolumeValue(); });
     }
@@ -57,5 +58,16 @@ public class OptionManager : MonoBehaviour
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         optionGrayWindow.SetActive(true);
         optionWindow.SetActive(true);
+    }
+
+    void ApplySingletonPattern()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }
