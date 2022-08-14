@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class OptionManager : MonoBehaviour
 {
     /* 20220811 작성자 : 김두현
-     * 배틀씬에서 esc를 누르면 옵션창을 띄우기위한 스크립트
+     * 옵션창에 관련된 스크립트
      */
     public static OptionManager instance;
     public GameObject optionWindow;
@@ -26,28 +26,22 @@ public class OptionManager : MonoBehaviour
         bgmSlider.onValueChanged.AddListener(delegate { SetBgmVolumeValue(); });
         sfxSlider.onValueChanged.AddListener(delegate { SetSfxVolumeValue(); });
     }
-    void Update()
-    {
-        isBattleScene = (SceneManager.GetActiveScene().name == "BattleRound1" || SceneManager.GetActiveScene().name == "BattleRound2") ? true : false;
-        if (isBattleScene && Input.GetKeyDown(KeyCode.Escape))
-        {
-            optionGrayWindow.SetActive(true);
-            optionWindow.SetActive(true);
-        }
-    }
 
     void SetBgmVolumeValue()
     {
         SoundManager.instance.bgmPlayer.volume = bgmSlider.value;
+        bgmValueText.text = ((int)(bgmSlider.value * 100)).ToString();
     }
 
     void SetSfxVolumeValue()
     {
         SoundManager.instance.sfxPlayer.volume = sfxSlider.value;
+        sfxValueText.text = ((int)(bgmSlider.value * 100)).ToString();
     }
 
     public void SelectOptionWindowClose()
     {
+        // 옵션 윈도우 닫을때 사용
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         optionGrayWindow.SetActive(false);
         optionWindow.SetActive(false);
@@ -55,6 +49,7 @@ public class OptionManager : MonoBehaviour
 
     public void SelectOptionWindowOpen()
     {
+        // 옵션 윈도우 열때 사용
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         optionGrayWindow.SetActive(true);
         optionWindow.SetActive(true);

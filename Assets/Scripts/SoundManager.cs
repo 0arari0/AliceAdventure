@@ -29,10 +29,6 @@ public class SoundManager : MonoBehaviour
         // MainMenu 씬에서 생성 이후에 모든 씬에서 사운드를 재생할 수 있어야 하므로 파괴되지 않도록 하였음
         ApplySingletonPattern();
     }
-    void Start()
-    {
-        
-    }
     public void PlayBgm(BGM_Name_ _bgmName)
     {
         // bgmPlayer 는 BGM 을 재생하는 오브젝트라서 한번에 하나의 사운드만 출력하기에 Play() 함수 사용

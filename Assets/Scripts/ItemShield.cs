@@ -14,7 +14,7 @@ public class ItemShield : MonoBehaviour
         }
         if (other.tag.Equals("Soldier"))
         {
-            Destroy(gameObject);
+            player.GetComponent<Player>().shieldEnable = false;
             other.GetComponent<CardSoldier>().SoldierDead();
         }
     }

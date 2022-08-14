@@ -8,7 +8,7 @@ public class BGRolling : MonoBehaviour
      * 해당 스크립트는 배틀씬에서 배경 이미지가 무한 스크롤 되도록 만들어줍니다.
      */
 
-    const float fixedRollingSpeed = 3f;
+    const float fixedRollingSpeed = 0.3f;
     MeshRenderer meshRenderer;
     float offset = 0;
     public float rollingSpeed = fixedRollingSpeed;

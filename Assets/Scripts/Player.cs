@@ -8,8 +8,9 @@ public class Player : MonoBehaviour
      * Player 스크립트에는 주인공 앨리스의 자동공격, 좌우 이동, 아이템 획득을 포함되어 있습니다.
      */
 
+    const int lockPositionX = 280;
     [SerializeField] GameObject attackPrefab; // 앨리스가 던지는 시계 투사체
-    [SerializeField] float moveSpeed = 200f, attackSpeed = 4f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)
+    [SerializeField] float moveSpeed = 300f, attackSpeed = 4f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)
     bool canAttack = true;
     const float itemDuration = 4f;
     float speedUpDuration = 0;
@@ -43,11 +44,22 @@ public class Player : MonoBehaviour
         {
             gameObject.transform.Translate(new Vector2(moveSpeed * Time.deltaTime, 0));
         }
+
+        // x좌표가 일정 범위를 벗어나면 다시 되돌아오게 함
+        if (gameObject.transform.position.x > lockPositionX)
+        {
+            gameObject.transform.Translate(new Vector2(-1 * moveSpeed * Time.deltaTime, 0));
+        }
+        else if (gameObject.transform.position.x < -1 * lockPositionX)
+        {
+            gameObject.transform.Translate(new Vector2(moveSpeed * Time.deltaTime, 0));
+        }
     }
 
     void Attack()
     {
-        GameObject obj = Instantiate(attackPrefab, gameObject.transform.position + new Vector3(0, 42, 0), Quaternion.identity);
+        // 시계가 플레이어 정수리에서 발사되도록 하였음
+        GameObject obj = Instantiate(attackPrefab, gameObject.transform.position + new Vector3(18, 32, 0), Quaternion.identity);
         obj.GetComponent<PlayerAttackPrefab>().SetDamage(playerDamage);
     }
 
@@ -78,9 +90,9 @@ public class Player : MonoBehaviour
         if (speedUpDuration > 0)
         {
             speedUpDuration -= Time.deltaTime;
-            moveSpeed = 300f;
+            moveSpeed = 450f;
         }
-        else moveSpeed = 200f;
+        else moveSpeed = 300f;
 
         if (damageUpDuration > 0)
         {
