@@ -12,8 +12,6 @@ public class BGRolling : MonoBehaviour
     MeshRenderer meshRenderer;
     float offset = 0;
     public float rollingSpeed = fixedRollingSpeed;
-    public float RollingSpeed { set { rollingSpeed = value; } }
-    // rollingSpeed 를 외부에서 수정할 수 있도록 하였으니 필요하실때 수정하시면 됩니다.
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -29,5 +27,10 @@ public class BGRolling : MonoBehaviour
     {
         // 이 함수는 rollingSpeed 를 변경한 이후에 다시 원래 속도로 만들고 싶을때 호출하면 됩니다.
         rollingSpeed = fixedRollingSpeed;
+    }
+
+    public void StopRolling()
+    {
+        rollingSpeed = 0;
     }
 }

@@ -29,13 +29,13 @@ public class UI : MonoBehaviour
     {
         Time.timeScale = 0f;
         panelPause.SetActive(true);
-        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick); // 20220814 18:12 김두현 - 버튼클릭 사운드 추가하였습니다
+        //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
     }
     public void OnClickBack()
     {
         Time.timeScale = 1f;
         panelPause.SetActive(false);
-        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick); // 20220814 18:12 김두현 - 버튼클릭 사운드 추가하였습니다
+        //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
     }
     public void OnClickOption()
     {

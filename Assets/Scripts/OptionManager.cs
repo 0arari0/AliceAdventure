@@ -30,13 +30,13 @@ public class OptionManager : MonoBehaviour
     void SetBgmVolumeValue()
     {
         SoundManager.instance.bgmPlayer.volume = bgmSlider.value;
-        bgmValueText.text = ((int)(bgmSlider.value * 100)).ToString();
+        bgmValueText.text = ((int)(bgmSlider.value * 100)).ToString() + "%";
     }
 
     void SetSfxVolumeValue()
     {
         SoundManager.instance.sfxPlayer.volume = sfxSlider.value;
-        sfxValueText.text = ((int)(bgmSlider.value * 100)).ToString();
+        sfxValueText.text = ((int)(sfxSlider.value * 100)).ToString() + "%";
     }
 
     public void SelectOptionWindowClose()

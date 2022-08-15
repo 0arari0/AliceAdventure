@@ -12,9 +12,10 @@ public class BigSpadeBullet : MonoBehaviour
     public GameObject smallSpadeBullet;
     public float moveSpeed = 400f;
     public int smallSpadeBulletNum;
+    public float limitPositionY;
     void Update()
     {
-        if (transform.position.y < 0)
+        if (transform.position.y < limitPositionY)
         {
             int rand = Random.Range(0, 360 / smallSpadeBulletNum);
             for (int i = 0; i < smallSpadeBulletNum; i++)

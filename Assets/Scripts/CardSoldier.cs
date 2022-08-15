@@ -34,12 +34,13 @@ public class CardSoldier : MonoBehaviour
 
     void Start()
     {
-        switch(soldierType)
+        player = GameObject.FindGameObjectWithTag("Player");
+        switch (soldierType)
         {
             // 카드 병사의 타입에 따라서 점수 변경
-            case SoldierType_.Spade: score = 200; player = GameObject.FindGameObjectWithTag("Player");
+            case SoldierType_.Spade: score = 200;
                 break;
-            case SoldierType_.Heart: score = 150; player = GameObject.FindGameObjectWithTag("Player");
+            case SoldierType_.Heart: score = 150;
                 break;
             case SoldierType_.Diamond: score = 125;
                 break;
@@ -93,39 +94,6 @@ public class CardSoldier : MonoBehaviour
             case SoldierType_.Heart:
                 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
                 transform.Translate(new Vector2((playerPosition - transform.position).normalized.x * Time.deltaTime * moveSpeedX, -1 * Time.deltaTime * moveSpeed));
-                /*
-                if (transform.position.y > 420f)
-                {
-                    if (transform.position.x > player.transform.position.x)
-                    {
-                        // 카드 병사의 x 좌표가 플레이어의 x 좌표보다 크면
-                        transform.Translate(new Vector2(0, -1 * moveSpeed * Time.deltaTime));
-                    }
-                    else
-                    {
-                        // 카드 병사의 x 좌표가 플레이어의 x 좌표보다 작으면
-                        transform.Translate(new Vector2(0, -1 * moveSpeed * Time.deltaTime));
-                    }
-                    playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-                }
-                else
-                {
-                    if (transform.position.y < -1 * 355f)
-                    {
-                        transform.Translate(new Vector2(0, -1 * moveSpeed * Time.deltaTime));
-                        return;
-                    }
-                    transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime * moveSpeed);
-                    if (player.transform.position.x > transform.position.x)
-                    {
-                        transform.Translate(new Vector2(moveSpeedX * Time.deltaTime, 0));
-                    }
-                    else
-                    {
-                        transform.Translate(new Vector2(-1 * moveSpeedX * Time.deltaTime, 0));
-                    }
-                }
-                */
                 break;
 
             case SoldierType_.Diamond:
@@ -157,6 +125,7 @@ public class CardSoldier : MonoBehaviour
     {
         //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
         SpawnItem(Random.Range(1, 21));
+        GameObject.Find("Main Camera").GetComponent<ScoreAndHeart>().AddScore(score);
         isDead = true;
     }
 

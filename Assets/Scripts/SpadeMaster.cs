@@ -9,8 +9,8 @@ public class SpadeMaster : MonoBehaviour
      * 외부에서 쓸일 없음
      */
 
-    public GameObject bigSpadeBullet;
-    const float bulletTime = 1.5f;
+    public GameObject[] bigSpadeBullets;
+    public  float bulletTime = 1.5f;
     public float moveSpeed = 150f;
     bool canMove = true;
     bool canShoot = true;
@@ -34,7 +34,7 @@ public class SpadeMaster : MonoBehaviour
     {
         // 1.05 ~ 1.8 초의 랜덤 쿨타임을 가지는 큰 스페이드 공격
         yield return new WaitForSeconds(Random.Range(bulletTime * 0.7f, bulletTime * 1.2f));
-        Instantiate(bigSpadeBullet, new Vector2(Random.Range(-120f, 120f), 370f), Quaternion.Euler(0, 0, 180f));
+        Instantiate(bigSpadeBullets[Random.Range(0, 2)], new Vector2(Random.Range(-120f, 120f), 370f), Quaternion.Euler(0, 0, 180f));
         canShoot = true;
     }
 }

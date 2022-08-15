@@ -115,5 +115,10 @@ public class Player : MonoBehaviour
             TakeItem(other.GetComponent<Item>().itemType);
             Destroy(other.gameObject);
         }
+        if(other.tag.Equals("SpadeBullet"))
+        {
+            playerHp--;
+            Destroy(other.gameObject);
+        }
     }
 }

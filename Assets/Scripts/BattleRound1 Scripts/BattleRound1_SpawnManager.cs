@@ -8,13 +8,20 @@ public class BattleRound1_SpawnManager : MonoBehaviour
     const float patternTime = 3.5f;
     const float spawnTime = 2.4f;
     const float spawnTimeHalf = 1.2f;
+    public float bossWaitTime = 5f;
     int patternNum = 0;
-    float roundTime = 60f;
+    float roundTime = 10f;
     float roundTime_ = 0f;
     bool canSpawn = true;
     public int[] spawnPattern;
     public GameObject[] cardSoldier;
+    public GameObject spadeMaster;
     public int patternRushSoldierNum, patternFollowSoldierNum, patternZigzagSoldierNum, patternNormalSoldierNum;
+    public float spawnTime_ = 5f;
+    float bossSoldierSpawnTIme = 0.8f;
+    bool isBossSpawned = false;
+    bool bossSoldierSpawnCheck = true;
+    public GameObject floorBG;
 
     void Update()
     {
@@ -27,7 +34,47 @@ public class BattleRound1_SpawnManager : MonoBehaviour
             }
             StartCoroutine(PatternTimeCheck());
         }
+        if (roundTime_ >= roundTime + bossWaitTime)
+        {
+            floorBG.GetComponent<BGRolling>().StopRolling();
+            if(!isBossSpawned)
+            {
+                Instantiate(spadeMaster, new Vector2(0, 600f), Quaternion.identity);
+                isBossSpawned = true;
+            }
+            if (bossSoldierSpawnCheck)
+            {
+                bossSoldierSpawnCheck = false;
+                int randDirection = Random.Range(0, 2);
+                int _height = Random.Range(-120, 120);
+                for (int i = 0; i < 4; i++)
+                {
+                    StartCoroutine(SpawnCardSoldier(i, randDirection, _height));
+                }
+                StartCoroutine(CheckSpawnBossSoldier());
+            }
+        }
         roundTime_ += Time.deltaTime;
+    }
+    IEnumerator CheckSpawnBossSoldier()
+    {
+        yield return new WaitForSeconds(Random.Range(spawnTime_, spawnTime * 1.4f));
+        bossSoldierSpawnCheck = true;
+    }
+    IEnumerator SpawnCardSoldier(int num, int _randDir, int height)
+    {
+        yield return new WaitForSeconds(bossSoldierSpawnTIme * num);
+        GameObject tmpObj;
+        if (_randDir == 0)
+        {
+            tmpObj = Instantiate(cardSoldier[4], new Vector3(450f, height, 0), Quaternion.identity);
+            tmpObj.GetComponent<BattleRound1_SoldierBossStage>().goRight = false;
+        }
+        else
+        {
+            tmpObj = Instantiate(cardSoldier[4], new Vector3(-450f, height, 0), Quaternion.identity);
+            tmpObj.GetComponent<BattleRound1_SoldierBossStage>().goRight = true;
+        }
     }
     IEnumerator PatternTimeCheck()
     {
@@ -39,7 +86,10 @@ public class BattleRound1_SpawnManager : MonoBehaviour
             canSpawn = true;
         }
     }
-
+    void SpawnSpadeMaster()
+    {
+        Instantiate(spadeMaster, transform.position, Quaternion.identity);
+    }
     IEnumerator PatternRush(float _time)
     {
         yield return new WaitForSeconds(_time);

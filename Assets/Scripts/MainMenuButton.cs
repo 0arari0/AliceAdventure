@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenuButton : MonoBehaviour
 {
+
     public GameObject howPlayWindow; // 조작법 윈도우
     public GameObject howPlayGrayWindow;
     public void SelectGameStartButton()
@@ -56,19 +57,19 @@ public class MainMenuButton : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i <= 20; i++)
+            for (int i = 0; i <= 40; i++)
             {
-                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i);
+                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i/4f);
                 yield return null;
             }
-            for (int i = 20; i >= -20; i--)
+            for (int i = 40; i >= -40; i--)
             {
-                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i);
+                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i/4f);
                 yield return null;
             }
-            for (int i = -20; i <= 0; i++)
+            for (int i = -40; i <= 0; i++)
             {
-                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i);
+                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i/4f);
                 yield return null;
             }
         }
