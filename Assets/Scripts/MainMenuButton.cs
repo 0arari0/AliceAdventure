@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class MainMenuButton : MonoBehaviour
 {
     public GameObject howPlayWindow; // 조작법 윈도우
@@ -33,5 +35,42 @@ public class MainMenuButton : MonoBehaviour
         // 메인 메뉴에서 게임 종료 버튼 눌렀을 때 실행
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         Application.Quit();
+    }
+
+    /// <summary>
+    /// 작성자: 김희재
+    /// 작성일자: 20220815 21:20
+    /// 여기 밑으로는 제가 임의로 작성했습니다.
+    /// 지우셔도 되고 고치셔도 됩니다^^
+    /// </summary>
+
+    [SerializeField]
+    GameObject titleImage;
+
+    void Awake()
+    {
+        StartCoroutine(Swing());
+    }
+
+    IEnumerator Swing()
+    {
+        while (true)
+        {
+            for (int i = 0; i <= 20; i++)
+            {
+                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i);
+                yield return null;
+            }
+            for (int i = 20; i >= -20; i--)
+            {
+                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i);
+                yield return null;
+            }
+            for (int i = -20; i <= 0; i++)
+            {
+                titleImage.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, i);
+                yield return null;
+            }
+        }
     }
 }

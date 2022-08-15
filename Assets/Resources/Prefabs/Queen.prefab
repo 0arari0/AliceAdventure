@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 6029477858347091828}
   - component: {fileID: 6029477858347091829}
   - component: {fileID: 6029477858347091826}
-  - component: {fileID: 2214574993730684593}
-  - component: {fileID: 114271744641729740}
   - component: {fileID: 50186861270278182}
+  - component: {fileID: 2214574993730684593}
   - component: {fileID: 5473766323525929095}
+  - component: {fileID: 4604333557288277055}
+  - component: {fileID: 61419709959141260}
   m_Layer: 0
   m_Name: Queen
   m_TagString: Enemy
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6029477858347091827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.3500001, y: 5.93, z: 89.989586}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -103,34 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2214574993730684593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6029477858347091827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15bcc799f63b5d49ac4d3bb576836cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enterStartPos: {x: 0, y: 570}
-  enterEndPos: {x: 0, y: 400}
-  maxHp: 1000
---- !u!114 &114271744641729740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6029477858347091827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f90ef5a2427f9740991c889de9d8301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 60
 --- !u!50 &50186861270278182
 Rigidbody2D:
   serializedVersion: 4
@@ -151,7 +124,22 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &2214574993730684593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029477858347091827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15bcc799f63b5d49ac4d3bb576836cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterStartPos: {x: 0, y: 570}
+  enterEndPos: {x: 0, y: 400}
+  maxHp: 300
 --- !u!114 &5473766323525929095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,10 +152,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba96b83756caba4e85d68e5f5550bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
+  secondsToAttack: 2
+  attackRate: 2
   interBulletRate: 0.1
-  modifyFirePos: {x: -45, y: 20}
-  bulletCountPerShot: 5
+  modifyFirePosWhenLeftMoving: {x: -67.5, y: 30}
+  normalBulletCountPerShot: 7
+  shotgunBulletCoundPerShot: 12
   normalAttackDegree: -90
-  shotgunMaxDegree: 240
-  shotgunMinDegree: 300
+  shotgunAttackDegree: -90
+  shotgunErrorRangeDegree: 30
+--- !u!114 &4604333557288277055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029477858347091827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f90ef5a2427f9740991c889de9d8301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 150
+--- !u!61 &61419709959141260
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029477858347091827}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 115, y: 114}
+    newSize: {x: 111, y: 114}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 115, y: 114}
+  m_EdgeRadius: 0

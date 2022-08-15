@@ -10,6 +10,12 @@ public class UI : MonoBehaviour
     GameObject bg;
     [SerializeField]
     GameObject panelPause;
+    [SerializeField]
+    GameObject warningUIs;
+    [SerializeField]
+    GameObject panelGameover;
+    [SerializeField]
+    GameObject panelWin;
 
     void Update()
     {
@@ -33,10 +39,38 @@ public class UI : MonoBehaviour
     }
     public void OnClickOption()
     {
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         OptionManager.instance.SelectOptionWindowOpen();
     }
     public void OnClickExit()
     {
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         SceneManager.LoadScene("MainMenu");
+    }
+    public void OnClickReplay()
+    {
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        SceneManager.LoadScene("BattleRound1");
+    }
+    public void OnClickHome()
+    {
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SetActiveOnPanelGameover()
+    {
+        Time.timeScale = 0f;
+        panelGameover.SetActive(true);
+    }
+    public void SetActiveOnPanelWin()
+    {
+        Time.timeScale = 0f;
+        panelWin.SetActive(true);
+    }
+
+    public void Warning()
+    {
+        warningUIs.SetActive(true);
     }
 }

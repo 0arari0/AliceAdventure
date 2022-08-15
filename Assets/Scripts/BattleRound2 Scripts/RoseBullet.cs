@@ -17,21 +17,23 @@ public class RoseBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Set(Vector2 firePos, float degree)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="firePos"></param>: 발사될 위치
+    /// <param name="degree"></param>: 발사되는 각도(0도는 오른쪽 방향)
+    /// <param name="speedMultiplyCoefficient"></param>: 기존 speed에 곱해지는 계수
+    public void Set(Vector2 firePos, float degree, float speedMultiplyCoefficient)
     {
         // 2번째로 호출
+        if (speedMultiplyCoefficient < 0f)
+            speedMultiplyCoefficient = 1f;
+
         transform.position = firePos;
-        rb.velocity = _GetNormalizedVector2(degree) * speed;
+        rb.velocity = _GetNormalizedVector2(degree) * speed * speedMultiplyCoefficient;
         transform.rotation = Quaternion.Euler(0, 0, 135 + degree);
         StartCoroutine(_DestroyAfterSeconds());
     }
-    // 아직 미완성
-/*    public void Set(Vector2 firePos, Vector2 hitPos)
-    {
-        // 2번째로 호출
-        StartCoroutine(_DestroyAfterSeconds());
-        transform.position = firePos;
-    }*/
 
     IEnumerator _DestroyAfterSeconds()
     {

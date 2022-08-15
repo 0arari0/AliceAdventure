@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/BattleRound1.unity
+- path: Assets/Scenes/BattleRound2.unity
   isLoaded: 1
   isActive: 1
