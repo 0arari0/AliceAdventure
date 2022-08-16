@@ -13,6 +13,7 @@ public class BuildBattleRound2 : MonoBehaviour
     [SerializeField]
     GameObject queen_prefab;
     GameObject _queen;
+    Queen _scriptQueen;
     [SerializeField]
     QueenSoilderSpawner leftSpawner;
     [SerializeField]
@@ -23,19 +24,26 @@ public class BuildBattleRound2 : MonoBehaviour
     [SerializeField]
     float soilderEmergeTimeAfterQueen; // 여왕 등장 후 해당 시간이 지나면 병정 등장
 
-    UI UI;
+    BattleRound2UI battleRound2UI;
 
     void Awake()
     {
-        UI = Camera.main.GetComponent<UI>();
+        battleRound2UI = Camera.main.GetComponent<BattleRound2UI>();
     }
     IEnumerator Start()
     {
-        UI.Warning();
+        battleRound2UI.Warning();
         yield return new WaitForSeconds(queenEmergeTimeAfterWarning);
         _queen = Instantiate(queen_prefab);
+        _scriptQueen = GetComponent<Queen>();
         yield return new WaitForSeconds(soilderEmergeTimeAfterQueen);
         leftSpawner.DeployStart();
         rightSpawner.DeployStart();
+    }
+
+    public void DeployStop()
+    {
+        leftSpawner.DeployStop();
+        rightSpawner.DeployStop();
     }
 }

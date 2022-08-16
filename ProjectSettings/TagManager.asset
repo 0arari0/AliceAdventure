@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - QueenBullet
   - SpadeBullet
+  - EnemyBoss
   layers:
   - Default
   - TransparentFX

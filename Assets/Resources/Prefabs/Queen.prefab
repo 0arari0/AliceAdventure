@@ -139,7 +139,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enterStartPos: {x: 0, y: 570}
   enterEndPos: {x: 0, y: 400}
-  maxHp: 300
+  maxHp: 10
+  movingIntervalTime: 1
+  movingIntervalTimeErrorPercent: 50
 --- !u!114 &5473766323525929095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +160,8 @@ MonoBehaviour:
   modifyFirePosWhenLeftMoving: {x: -67.5, y: 30}
   normalBulletCountPerShot: 7
   shotgunBulletCoundPerShot: 12
-  normalAttackDegree: -90
-  shotgunAttackDegree: -90
+  normalAttackDegree: 270
+  shotgunAttackDegree: 270
   shotgunErrorRangeDegree: 30
 --- !u!114 &4604333557288277055
 MonoBehaviour:

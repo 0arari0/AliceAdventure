@@ -5,11 +5,11 @@ using UnityEngine;
 public class RigidBody2DMove : MonoBehaviour
 {
     [SerializeField]
+    [Range(50f, 500f)]
     float speed;
     
     Rigidbody2D _rb;
 
-    Coroutine _move = null;
     public bool _isMove { get; private set; } = false;
 
     void Awake()
@@ -28,18 +28,9 @@ public class RigidBody2DMove : MonoBehaviour
             yield return null;
         }
     }
-    public void MoveStop()
-    {
-        _isMove = false;
-        StopCoroutine(_move);
-    }
 
     public Vector2 GetPosition() { return _rb.position; }
     public void SetPosition(Vector2 pos) { _rb.position = pos; }
     public float GetSpeed() { return speed; }
-    public void SetSpeed(float speed)
-    {
-        if (speed <= 0f) speed = 5f;
-        this.speed = speed;
-    }
+    public void SetSpeed(float speed) { this.speed = speed; }
 }

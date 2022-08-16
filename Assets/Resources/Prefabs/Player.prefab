@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5762845116501471168}
   - component: {fileID: 3300045695576930403}
   - component: {fileID: 95250408256850786}
+  - component: {fileID: 2117859673060491500}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -94,7 +95,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -3, y: 0}
@@ -145,12 +146,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 4585690715374064207, guid: c34360c2142580c4e9cdd6214a16c50a,
     type: 3}
-  moveSpeed: 200
   attackSpeed: 4
   shieldEnable: 0
   itemShield: {fileID: 6201814215702042962}
-  playerHp: 3
   playerDamage: 1
+  enterStart: {x: 0, y: 0}
+  enterEnd: {x: 0, y: 0}
 --- !u!95 &95250408256850786
 Animator:
   serializedVersion: 3
@@ -170,6 +171,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2117859673060491500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5762845116501471172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f90ef5a2427f9740991c889de9d8301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 300
 --- !u!1 &6201814215702042962
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,10 +8,18 @@ public class BGRolling : MonoBehaviour
      * 해당 스크립트는 배틀씬에서 배경 이미지가 무한 스크롤 되도록 만들어줍니다.
      */
 
+    [SerializeField]
+    Dir dir; // 무한 스크롤할 방향
     const float fixedRollingSpeed = 0.3f;
     MeshRenderer meshRenderer;
     float offset = 0;
     public float rollingSpeed = fixedRollingSpeed;
+
+    public enum Dir
+    {
+        horizontal, vertical
+    }
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -20,7 +28,7 @@ public class BGRolling : MonoBehaviour
     void Update()
     {
         offset += Time.deltaTime * rollingSpeed;
-        meshRenderer.material.mainTextureOffset = new Vector2(0, offset);
+        meshRenderer.material.mainTextureOffset = dir == Dir.vertical ? new Vector2(0, offset) : new Vector2(offset, 0);
     }
 
     public void InitRollingSpeed()

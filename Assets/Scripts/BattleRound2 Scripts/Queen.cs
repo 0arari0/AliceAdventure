@@ -13,7 +13,9 @@ public class Queen : MonoBehaviour, IMove
     RigidBody2DMove scriptRB2DMove;
     QueenAttack scriptQueenAttack;
     SpriteRenderer spriteRenderer;
-    UI scriptUI;
+    BuildBattleRound2 buildBattleRound2;
+    BattleRound2UI scriptUI;
+    Animator animator;
 
     Coroutine corMovePattern; // 움직임 전체 코루틴
     Coroutine corCurPattern; // 현재 움직임 코루틴
@@ -25,58 +27,87 @@ public class Queen : MonoBehaviour, IMove
     Vector2 movableLimitUpRight = new Vector2(220f, 420f); // 여왕이 화면 내를 움직일 수 있는 범위 우상단 한도
     Vector2 movableLimitBottomDown = new Vector2(-220f, 150f); // 여왕이 화면 내를 움직일 수 있는 범위 좌하단 한도
 
-    bool isAlive = true;
+    Color colorOrigin;
+    Color colorAttacked;
+
+    public bool isAlive { get; private set; } = true;
+    public bool isAttacked { get; private set; } = false;
     public bool isMovingLeft { get; private set; } = true;
     [SerializeField]
+    [Range(1, 1000)]
     int maxHp;
     int curHp;
+    [SerializeField]
+    [Range(0f, 5f)]
+    float movingIntervalTime; // 움직임 사이 멈추는 시간
+    [SerializeField]
+    [Range(0, 100)]
+    int movingIntervalTimeErrorPercent; // 움직임 사이 멈추는 시간 오차 퍼센트(10% 이면 +-10% 적용)
 
     void Awake()
     {
-        ConnectComponents();
+        scriptRB2DMove = GetComponent<RigidBody2DMove>();
+        scriptQueenAttack = GetComponent<QueenAttack>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        buildBattleRound2 = Camera.main.GetComponent<BuildBattleRound2>();
+        scriptUI = Camera.main.GetComponent<BattleRound2UI>();
+        animator = GetComponent<Animator>();
+    }
+    void OnEnable()
+    {
         curHp = maxHp;
         name = "Queen";
         transform.position = enterStartPos;
+        colorOrigin = spriteRenderer.color;
+        colorAttacked = new Color(1f, 0.5f, 0.5f);
     }
     void Start()
     {
         corMovePattern = StartCoroutine(ObjectMove(enterStartPos));
     }
-    void OnDestroy()
-    {
 
-    }
-
-    void ConnectComponents()
-    {
-        scriptRB2DMove = GetComponent<RigidBody2DMove>();
-        scriptQueenAttack = GetComponent<QueenAttack>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        scriptUI = Camera.main.GetComponent<UI>();
-    }
     Vector2 GetRandomMovablePosition()
     {
         return new Vector2(Random.Range(movableLimitBottomDown.x, movableLimitUpRight.x),
                            Random.Range(movableLimitBottomDown.y, movableLimitUpRight.y));
     }
-    void OnTriggerEnter2D(Collider2D other)
+    IEnumerator GetDamage(int damage)
     {
-        if (other.tag == "PlayerAttack")
+        if (isAttacked) yield break; // 공격 받는 동안은 무적
+        isAttacked = true;
+        curHp -= damage;
+        if (curHp <= 0) // 여왕 소멸
         {
-            int damage = other.gameObject.GetComponent<PlayerAttackPrefab>().Damage;
-            curHp -= damage;
-            if (curHp <= 0f)
+            isAlive = false;
+            animator.speed = 0f; // 애니메이션 중지
+            StopCoroutine(corCurPattern); // 부분 이동 중지
+            StopCoroutine(corMovePattern); // 전체 이동 중지
+            scriptQueenAttack.AttackStop(); // 공격 중지
+            buildBattleRound2.DeployStop(); // 병정 소환 중지
+            for (int i = 0; i < 50; i++) // 여왕 점차 희미하게 사라짐
             {
-                isAlive = false;
-                // 게임 종료
-                // 이겼으면
-                // scriptUI.SetActiveOnPanelWin();
-                // 졌으면
-                // scriptUI.SetActiveOnPanelGameover();
+                spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
+                yield return null;
             }
-            Destroy(other.gameObject);
+            Destroy(gameObject); // 여왕 파괴
         }
+        spriteRenderer.color = colorAttacked;
+        yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과
+        spriteRenderer.color = colorOrigin;
+        isAttacked = false;
+    }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            StartCoroutine(GetDamage(other.gameObject.GetComponent<PlayerAttackPrefab>().Damage));
+        }
+        else if (other.tag == "PlayerAttack")
+        {
+            StartCoroutine(GetDamage(other.gameObject.GetComponent<PlayerAttackPrefab>().Damage));
+            Destroy(other.gameObject); // 플레이어 총알 파괴
+        }
     }
 
     /// <summary>
@@ -92,16 +123,18 @@ public class Queen : MonoBehaviour, IMove
         // 화면 돌아다님
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(0.5f, 2f)); // 0.5 ~ 2초 기다림
+            yield return new WaitForSeconds(Random.Range(
+                movingIntervalTime * (1 - movingIntervalTimeErrorPercent / 100f),
+                movingIntervalTime * (1 + movingIntervalTimeErrorPercent / 100f)));
             Vector2 start = scriptRB2DMove.GetPosition();
             Vector2 end = GetRandomMovablePosition();
 
-            if (start.x < end.x)
+            if (start.x < end.x) // 오른쪽으로 이동
             {
                 spriteRenderer.flipX = true;
                 isMovingLeft = false;
             }
-            else
+            else // 왼쪽으로 이동
             {
                 spriteRenderer.flipX = false;
                 isMovingLeft = true;

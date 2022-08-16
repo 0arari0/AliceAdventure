@@ -27,12 +27,8 @@ public class ScoreAndHeart : MonoBehaviour
     void RefreshHeartNum()
     {
         for (int i = 0; i < 3; i++)
-        {
             heartsImage[i].sprite = emptyHeart;
-        }
-        for(int i=0;i<player.GetComponent<Player>().playerHp;i++)
-        {
+        for (int i = 0; i < player.GetComponent<Player>().playerHp; i++)
             heartsImage[i].sprite = fullHeart;
-        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UI : MonoBehaviour
+public class BattleRound2UI : MonoBehaviour
 {
     [SerializeField]
     GameObject bg;
@@ -16,6 +16,12 @@ public class UI : MonoBehaviour
     GameObject panelGameover;
     [SerializeField]
     GameObject panelWin;
+
+    void Awake()
+    {
+        Player.instance.Resurrection();
+        Player.instance.battleRoundUI = this;
+    }
 
     void Update()
     {
@@ -45,16 +51,19 @@ public class UI : MonoBehaviour
     public void OnClickExit()
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        Player.instance.Resurrection();
         SceneManager.LoadScene("MainMenu");
     }
     public void OnClickReplay()
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
-        SceneManager.LoadScene("BattleRound1");
+        Player.instance.Resurrection();
+        SceneManager.LoadScene("MainMenu");
     }
     public void OnClickHome()
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        Player.instance.Resurrection();
         SceneManager.LoadScene("MainMenu");
     }
 

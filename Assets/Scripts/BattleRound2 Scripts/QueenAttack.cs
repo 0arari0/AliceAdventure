@@ -5,27 +5,34 @@ using UnityEngine;
 public class QueenAttack : MonoBehaviour
 {
     [SerializeField]
+    [Range(0f, 10f)]
     float secondsToAttack; // 이 시간이 지나야 공격 시작
     [SerializeField]
+    [Range(0.1f, 5f)]
     float attackRate; // 한 세트의 총알 쏘고 난 후 쿨타임
     [SerializeField]
+    [Range(0.01f, 3f)]
     float interBulletRate; // 한 세트 안에서 각 총알 간의 간격(shotgun은 영향 없음)
-                           // 한 세트가 총알 3개, bulletRatePerSecond == 0이면 3발이 겹쳐나감
+                           // 한 세트가 총알 3개, interBulletRate == 0이면 3발이 겹쳐나감
     [SerializeField]
     Vector2 modifyFirePosWhenLeftMoving; // (0, 0)일시 여왕 중앙에서 총알 생성
                                           // 이 값을 조율하여 여왕 중앙으로부터 얼마나 벗어나서 쏠 것인지 결정
                                           // 여왕이 왼쪽으로 이동 중일 때 기준
     [SerializeField]
+    [Range(1, 20)]
     int normalBulletCountPerShot;
     [SerializeField]
+    [Range(1, 50)]
     int shotgunBulletCoundPerShot;
 
     Coroutine _totalAttack = null;
     Coroutine _corAttack = null;
 
     [SerializeField]
+    [Range(0f, 360f)]
     float normalAttackDegree; // 총알이 발사되는 방향(오른쪽 방향이 0도, 반시계 방향으로 증가)
     [SerializeField]
+    [Range(0f, 360f)]
     float shotgunAttackDegree;
     [SerializeField]
     [Range(0f, 180f)]
@@ -41,20 +48,11 @@ public class QueenAttack : MonoBehaviour
     void Awake()
     {
         ConnectComponents();
-        ValidCheck();
     }
 
     void ConnectComponents()
     {
         scriptQueen = GetComponent<Queen>();
-    }
-    void ValidCheck()
-    {
-        // 이상 값이 들어올 시 초기화값을 정해줌
-        if (attackRate < 0f) attackRate = 0.01f;
-        if (interBulletRate < 0f) interBulletRate = 0.2f;
-        if (normalBulletCountPerShot < 0) normalBulletCountPerShot = 5;
-        if (shotgunBulletCoundPerShot < 0) shotgunBulletCoundPerShot = 8;
     }
 
     public void AttackStart()
