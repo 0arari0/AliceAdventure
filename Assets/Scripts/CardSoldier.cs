@@ -9,7 +9,7 @@ public class CardSoldier : MonoBehaviour
      */
 
     const int moveSpeedX = 60;
-    public int soldierHp = 4;
+    public int soldierHp;
     public float moveSpeed;
     bool isDead = false;
     float deadTime = 1.16f;
@@ -82,7 +82,7 @@ public class CardSoldier : MonoBehaviour
                 else
                 {
                     // 플레이어 향해서 돌진
-                    if (transform.position.y < -1 * 355f)
+                    if (transform.position.y < -295f)
                     {
                         transform.Translate(new Vector2(0, -1 * moveSpeed * Time.deltaTime));
                         return;
@@ -123,7 +123,8 @@ public class CardSoldier : MonoBehaviour
 
     public void SoldierDead()
     {
-        //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
         SpawnItem(Random.Range(1, 21));
         GameObject.Find("Main Camera").GetComponent<ScoreAndHeart>().AddScore(score);
         isDead = true;
@@ -139,7 +140,7 @@ public class CardSoldier : MonoBehaviour
             Destroy(other.gameObject);
             if (soldierHp > 0)
             {
-                //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
+                SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
                 attackedWhite.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                 isAttacked = true;
             }

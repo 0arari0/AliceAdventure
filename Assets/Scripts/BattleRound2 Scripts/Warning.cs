@@ -41,6 +41,7 @@ public class Warning : MonoBehaviour
         yield return rectMove.StartCoroutine(rectMove.MoveStart(screenRight, screenMiddle));
         yield return new WaitForSeconds(stayDuration);
         yield return rectMove.StartCoroutine(rectMove.MoveStart(screenMiddle, screenLeft));
+        yield return new WaitForSeconds(0.2f);
 
         gameObject.transform.parent.gameObject.SetActive(false); // 다 끝나면 종료
     }

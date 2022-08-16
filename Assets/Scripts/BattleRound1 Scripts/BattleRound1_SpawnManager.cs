@@ -10,7 +10,7 @@ public class BattleRound1_SpawnManager : MonoBehaviour
     const float spawnTimeHalf = 1.2f;
     public float bossWaitTime = 5f;
     int patternNum = 0;
-    float roundTime = 10f;
+    public float roundTime = 10f;
     float roundTime_ = 0f;
     bool canSpawn = true;
     public int[] spawnPattern;
@@ -46,7 +46,7 @@ public class BattleRound1_SpawnManager : MonoBehaviour
             {
                 bossSoldierSpawnCheck = false;
                 int randDirection = Random.Range(0, 2);
-                int _height = Random.Range(-120, 120);
+                int _height = Random.Range(-150, 150);
                 for (int i = 0; i < 4; i++)
                 {
                     StartCoroutine(SpawnCardSoldier(i, randDirection, _height));

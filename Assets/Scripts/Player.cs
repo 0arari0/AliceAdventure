@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     const int lockPositionX = 280;
     [SerializeField] GameObject attackPrefab; // 앨리스가 던지는 시계 투사체
-    [SerializeField] float attackSpeed = 4f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)
+    [SerializeField] float attackSpeed = 6f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)
     bool canAttack = true;
     const float itemDuration = 4f;
     float speedUpDuration = 0;
@@ -65,11 +65,18 @@ public class Player : MonoBehaviour
         isAttacked = false;
         playerHp = 3;
 
+        spriteRenderer.color = new Color(1, 1, 1, 1);
         colorOrigin = spriteRenderer.color;
         colorAttacked = new Color(1f, 0.5f, 0.5f);
+        animator.speed = 1f;
+
+        canAttack = true;
+
+        StartCoroutine(Start());
     }
     IEnumerator Start()
     {
+        rbMove.InitPlayerPosition();
         yield return _act = rbMove.StartCoroutine(rbMove.MoveStart(enterStart, enterEnd)); // 플레이어 입장
         _act = StartCoroutine(Act()); // 모든 행동 시작
     }
@@ -150,9 +157,9 @@ public class Player : MonoBehaviour
         if (speedUpDuration > 0)
         {
             speedUpDuration -= Time.deltaTime;
-            rbMove.SetSpeed(450f);
+            rbMove.SetSpeed(300f);
         }
-        else rbMove.SetSpeed(300f);
+        else rbMove.SetSpeed(200f);
 
         if (damageUpDuration > 0)
         {
@@ -192,10 +199,18 @@ public class Player : MonoBehaviour
         isAttacked = false;
     }
 
+    public void PlayerGameOver()
+    {
+        animator.speed = 0f;
+        StopCoroutine(_act);
+        battleRoundUI.SetActiveOnPanelGameover();
+    }
+
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag.Equals("Item")) // 아이템 충돌
         {
+            SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.GetItem);
             TakeItem(other.GetComponent<Item>().itemType);
             Destroy(other.gameObject);
         }

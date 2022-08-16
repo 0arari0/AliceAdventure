@@ -31,12 +31,6 @@ public class BGRolling : MonoBehaviour
         meshRenderer.material.mainTextureOffset = dir == Dir.vertical ? new Vector2(0, offset) : new Vector2(offset, 0);
     }
 
-    public void InitRollingSpeed()
-    {
-        // 이 함수는 rollingSpeed 를 변경한 이후에 다시 원래 속도로 만들고 싶을때 호출하면 됩니다.
-        rollingSpeed = fixedRollingSpeed;
-    }
-
     public void StopRolling()
     {
         rollingSpeed = 0;

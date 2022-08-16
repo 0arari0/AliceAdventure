@@ -17,6 +17,11 @@ public class RigidBody2DMove : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    public void InitPlayerPosition()
+    {
+        _rb.position = new Vector2(0, -550f);
+    }
+
     public IEnumerator MoveStart(Vector2 startPos, Vector2 endPos)
     {
         _isMove = true;
