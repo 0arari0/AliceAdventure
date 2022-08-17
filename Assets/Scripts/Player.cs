@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
      */
 
     public static Player instance = null;
-
+    public int stageScore = 0;
     const int lockPositionX = 280;
     [SerializeField] GameObject attackPrefab; // 앨리스가 던지는 시계 투사체
     [SerializeField] float attackSpeed = 6f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)

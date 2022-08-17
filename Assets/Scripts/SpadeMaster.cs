@@ -66,7 +66,6 @@ public class SpadeMaster : MonoBehaviour
     }
     IEnumerator ShootBullet()
     {
-        // 1.05 ~ 1.8 초의 랜덤 쿨타임을 가지는 큰 스페이드 공격
         yield return new WaitForSeconds(Random.Range(bulletTime * 0.7f, bulletTime * 1.2f));
         Instantiate(bigSpadeBullets[Random.Range(0, 2)], new Vector2(Random.Range(-120f, 120f), 370f), Quaternion.Euler(0, 0, 180f));
         canShoot = true;

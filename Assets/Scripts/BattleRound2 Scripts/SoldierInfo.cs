@@ -54,11 +54,11 @@ public class SoldierInfo : MonoBehaviour
 
     void SoldierDead()
     {
-        //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
         int percentage = Random.Range(0, 101);
         if (percentage <= dropPercentage)
             Instantiate(items[Random.Range(0, items.Length)], gameObject.transform.position, Quaternion.identity);
-        //GameObject.Find("Main Camera").GetComponent<ScoreAndHeart>().AddScore(score);
+        GameObject.Find("Main Camera").GetComponent<ScoreAndHeart>().AddScore(score);
         isAlive = false;
     }
 
@@ -72,7 +72,7 @@ public class SoldierInfo : MonoBehaviour
             Destroy(other.gameObject); // 앨리스 총알 제거
             if (curHp > 0)
             {
-                //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
+                SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
                 attackedWhite.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                 isAttacked = true;
             }
