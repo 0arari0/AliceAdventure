@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SpadeMaster : MonoBehaviour
 {
@@ -81,6 +80,7 @@ public class SpadeMaster : MonoBehaviour
         if (curHp <= 0) // 1라 보스 소멸
         {
             isAlive = false;
+            GameManager.instance.isClear = true;
             animator.speed = 0f; // 애니메이션 중지
             StopCoroutine(_act); // 1라 보스 모든 행동 중지
             for (int i = 0; i < 50; i++) // 1라 보스 점차 희미하게 사라짐
@@ -88,8 +88,9 @@ public class SpadeMaster : MonoBehaviour
                 spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
                 yield return null;
             }
-            SceneManager.LoadScene("BattleRound2");
-            Destroy(gameObject); // 플레이어 파괴
+            GameManager.instance.LoadNextScene();
+            Destroy(gameObject); // 1라 보스 파괴
+            yield break;
         }
         spriteRenderer.color = colorAttacked;
         yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과

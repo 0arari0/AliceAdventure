@@ -24,15 +24,15 @@ public class BuildBattleRound2 : MonoBehaviour
     [SerializeField]
     float soilderEmergeTimeAfterQueen; // 여왕 등장 후 해당 시간이 지나면 병정 등장
 
-    BattleRound2UI battleRound2UI;
+    BattleRoundUI battleRoundUI;
 
     void Awake()
     {
-        battleRound2UI = Camera.main.GetComponent<BattleRound2UI>();
+        battleRoundUI = Camera.main.GetComponent<BattleRoundUI>();
     }
     IEnumerator Start()
     {
-        battleRound2UI.Warning();
+        battleRoundUI.Warning();
         yield return new WaitForSeconds(queenEmergeTimeAfterWarning);
         _queen = Instantiate(queen_prefab);
         _scriptQueen = GetComponent<Queen>();

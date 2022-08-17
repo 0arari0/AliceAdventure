@@ -29,13 +29,13 @@ public class OptionManager : MonoBehaviour
 
     void SetBgmVolumeValue()
     {
-        SoundManager.instance.bgmPlayer.volume = bgmSlider.value;
+        SoundManager.instance.bgmPlayer.volume = bgmSlider.value * 0.2f;
         bgmValueText.text = ((int)(bgmSlider.value * 100)).ToString() + "%";
     }
 
     void SetSfxVolumeValue()
     {
-        SoundManager.instance.sfxPlayer.volume = sfxSlider.value;
+        SoundManager.instance.sfxPlayer.volume = sfxSlider.value * 0.2f;
         sfxValueText.text = ((int)(sfxSlider.value * 100)).ToString() + "%";
     }
 

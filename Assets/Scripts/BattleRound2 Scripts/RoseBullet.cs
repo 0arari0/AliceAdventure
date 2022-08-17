@@ -47,12 +47,4 @@ public class RoseBullet : MonoBehaviour
         float rad = degree * Mathf.Deg2Rad;
         return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
     }
-
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.gameObject.tag.Equals("Player"))
-        {
-            Debug.Log("플레이어가 여왕의 총알에 피격 구현");
-        }
-    }
 }

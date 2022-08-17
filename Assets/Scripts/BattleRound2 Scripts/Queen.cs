@@ -14,7 +14,7 @@ public class Queen : MonoBehaviour, IMove
     QueenAttack scriptQueenAttack;
     SpriteRenderer spriteRenderer;
     BuildBattleRound2 buildBattleRound2;
-    BattleRound2UI scriptUI;
+    BattleRoundUI scriptUI;
     Animator animator;
 
     Coroutine corMovePattern; // 움직임 전체 코루틴
@@ -50,7 +50,7 @@ public class Queen : MonoBehaviour, IMove
         scriptQueenAttack = GetComponent<QueenAttack>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         buildBattleRound2 = Camera.main.GetComponent<BuildBattleRound2>();
-        scriptUI = Camera.main.GetComponent<BattleRound2UI>();
+        scriptUI = Camera.main.GetComponent<BattleRoundUI>();
         animator = GetComponent<Animator>();
     }
     void OnEnable()
@@ -79,6 +79,7 @@ public class Queen : MonoBehaviour, IMove
         if (curHp <= 0) // 여왕 소멸
         {
             isAlive = false;
+            GameManager.instance.isClear = true;
             animator.speed = 0f; // 애니메이션 중지
             StopCoroutine(corCurPattern); // 부분 이동 중지
             StopCoroutine(corMovePattern); // 전체 이동 중지
@@ -89,7 +90,10 @@ public class Queen : MonoBehaviour, IMove
                 spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
                 yield return null;
             }
+            scriptUI.SetActiveOnPanelWin();
+            Player.instance.Deactivate();
             Destroy(gameObject); // 여왕 파괴
+            yield break;
         }
         spriteRenderer.color = colorAttacked;
         yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과

@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447a0aef44999214fa09801f16d0a941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
+  maxHp: 2
   bigSpadeBullets:
   - {fileID: 7445089905853389570, guid: fff5e5501ea2a5d4da0701f7384f412f, type: 3}
   - {fileID: 7445089905853389570, guid: 898228ba22bd261459080dfea4421506, type: 3}

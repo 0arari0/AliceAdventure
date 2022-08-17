@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class Warning : MonoBehaviour
 {
     [SerializeField]
+    [Range(0f, 5f)]
     float stayDuration; // 화면 중앙에 머무는 시간(초)
     [SerializeField]
+    [Range(0.01f, 2f)]
     float changeIntervalTime; // 색상이 변경되는 데 소요되는 시간
 
     Image image;
@@ -17,18 +19,11 @@ public class Warning : MonoBehaviour
     {
         rectMove = GetComponent<RectTransformMove>();
         image = GetComponent<Image>();
-
-        ValidCheck();
     }
     void Start()
     {
         StartCoroutine(Move());
         StartCoroutine(RandomChangeImageColor());
-    }
-
-    void ValidCheck()
-    {
-        if (stayDuration < 0f) stayDuration = 1f;
     }
 
     IEnumerator Move()

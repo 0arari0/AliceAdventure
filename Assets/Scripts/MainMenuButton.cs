@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuButton : MonoBehaviour
@@ -14,11 +13,11 @@ public class MainMenuButton : MonoBehaviour
     {
         // 메인 메뉴에서 게임 시작 버튼 눌렀을 때 실행
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
-        GameObject playerParent = GameObject.Find("PlayerParent");
-        playerParent.transform.GetChild(0).gameObject.SetActive(false);
-        playerParent.transform.GetChild(0).gameObject.SetActive(true);
+        //GameObject playerParent = GameObject.Find("PlayerParent");
+        //playerParent.transform.GetChild(0).gameObject.SetActive(false);
+        //playerParent.transform.GetChild(0).gameObject.SetActive(true);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("BattleRound1");
+        GameManager.instance.LoadNextScene();
     }
 
     public void SelectHowPlayButton()

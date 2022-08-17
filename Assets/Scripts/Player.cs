@@ -30,16 +30,32 @@ public class Player : MonoBehaviour
     RigidBody2DMove rbMove;
     Animator animator;
     SpriteRenderer spriteRenderer;
-    public BattleRound2UI battleRoundUI;
+    BattleRoundUI battleRoundUI;
 
     Color colorOrigin;
     Color colorAttacked;
 
     Coroutine _act = null; // 앨리스의 행동 코루틴
+    Coroutine _cAtk = null;
 
-    public void Resurrection() // 플레이어 부활
+    public void Activate() // 플레이어 부활
     {
+        if (gameObject.activeSelf) // 대신 이미 활성화 되어있다면 이 함수 무시
+            return;
         gameObject.SetActive(true);
+        battleRoundUI = null;
+    }
+    public void Deactivate() // 플레이어 비활성화
+    {
+        if (!gameObject.activeSelf)
+            return;
+        gameObject.SetActive(false);
+        battleRoundUI = null;
+    }
+    public void SetScript(BattleRoundUI battleRoundUI) // battleRoundUI만 배틀 중일 때 따로 저장
+    {
+        if (gameObject.activeSelf)
+            this.battleRoundUI = battleRoundUI;
     }
 
     void Awake()
@@ -59,11 +75,14 @@ public class Player : MonoBehaviour
         rbMove = GetComponent<RigidBody2DMove>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //battleRoundUI = Camera.main.GetComponent<BattleRound2UI>();
 
         isAlive = true;
         isAttacked = false;
         playerHp = 3;
+        attackSpeed = 6f;
+        rbMove.InitializeSpeed();
+        playerDamage = 1;
+        itemShield.SetActive(false);
 
         spriteRenderer.color = new Color(1, 1, 1, 1);
         colorOrigin = spriteRenderer.color;
@@ -76,7 +95,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator Start()
     {
-        rbMove.InitPlayerPosition();
+        rbMove.SetPosition(enterStart);
         yield return _act = rbMove.StartCoroutine(rbMove.MoveStart(enterStart, enterEnd)); // 플레이어 입장
         _act = StartCoroutine(Act()); // 모든 행동 시작
     }
@@ -89,7 +108,7 @@ public class Player : MonoBehaviour
             {
                 Attack();
                 canAttack = false;
-                StartCoroutine(C_Attack());
+                _cAtk = StartCoroutine(C_Attack());
             }
             CheckItemDuration();
             yield return null;
@@ -97,6 +116,7 @@ public class Player : MonoBehaviour
     }
     public void StopAct()
     {
+        StopCoroutine(_cAtk);
         StopCoroutine(_act);
     }
 
@@ -159,7 +179,7 @@ public class Player : MonoBehaviour
             speedUpDuration -= Time.deltaTime;
             rbMove.SetSpeed(300f);
         }
-        else rbMove.SetSpeed(200f);
+        else rbMove.InitializeSpeed();
 
         if (damageUpDuration > 0)
         {
@@ -184,14 +204,15 @@ public class Player : MonoBehaviour
         {
             isAlive = false;
             animator.speed = 0f; // 애니메이션 중지
-            StopCoroutine(_act); // 플레이어 모든 행동 중지
+            StopAct(); // 플레이어 모든 행동 중지
             for (int i = 0; i < 50; i++) // 플레이어 점차 희미하게 사라짐
             {
                 spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
                 yield return null;
             }
-            battleRoundUI.SetActiveOnPanelGameover();
-            gameObject.SetActive(false);
+            battleRoundUI.SetActiveOnPanelGameover(); // 게임오버 패널 창 띄움
+            gameObject.SetActive(false); // 플레이어가 죽으면 비활성화
+            yield break;
         }
         spriteRenderer.color = colorAttacked;
         yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과
@@ -202,7 +223,7 @@ public class Player : MonoBehaviour
     public void PlayerGameOver()
     {
         animator.speed = 0f;
-        StopCoroutine(_act);
+        StopAct();
         battleRoundUI.SetActiveOnPanelGameover();
     }
 
@@ -214,14 +235,21 @@ public class Player : MonoBehaviour
             TakeItem(other.GetComponent<Item>().itemType);
             Destroy(other.gameObject);
         }
-        else if(other.tag.Equals("SpadeBullet")) // 1라운드 보스 총알 충돌
+        else if (other.tag.Equals("SpadeBullet")) // 1라운드 보스 총알 충돌
         {
-            StartCoroutine(GetDamage(1));
+            if (!GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
+                StartCoroutine(GetDamage(1));
             Destroy(other.gameObject);
         }
         else if (other.tag.Equals("QueenBullet")) // 2라운드 보스 총알 충돌
-            StartCoroutine(GetDamage(3)); // 즉사
+        {
+            if (!GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
+                StartCoroutine(GetDamage(3)); // 즉사
+        }
         else if (other.tag.Equals("Soldier")) // 병정들 맞았을 때
-            StartCoroutine(GetDamage(1));
+        {
+            if (!GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
+                StartCoroutine(GetDamage(1));
+        }
     }
 }

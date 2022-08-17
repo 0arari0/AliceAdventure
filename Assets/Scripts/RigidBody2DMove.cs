@@ -7,6 +7,7 @@ public class RigidBody2DMove : MonoBehaviour
     [SerializeField]
     [Range(50f, 500f)]
     float speed;
+    float _originSpeed;
     
     Rigidbody2D _rb;
 
@@ -15,6 +16,8 @@ public class RigidBody2DMove : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        _originSpeed = speed;
     }
 
     public void InitPlayerPosition()
@@ -38,4 +41,10 @@ public class RigidBody2DMove : MonoBehaviour
     public void SetPosition(Vector2 pos) { _rb.position = pos; }
     public float GetSpeed() { return speed; }
     public void SetSpeed(float speed) { this.speed = speed; }
+    public void AddSpeed(float speed)
+    {
+        this.speed += speed;
+        if (speed <= 0f) InitializeSpeed();
+    }
+    public void InitializeSpeed() { speed = _originSpeed; }
 }
