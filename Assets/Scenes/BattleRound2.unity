@@ -2722,6 +2722,7 @@ GameObject:
   - component: {fileID: 1535450931}
   - component: {fileID: 1535450932}
   - component: {fileID: 1535450933}
+  - component: {fileID: 1535450934}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2809,7 +2810,7 @@ MonoBehaviour:
     type: 3}
   leftSpawner: {fileID: 967034878}
   rightSpawner: {fileID: 1135293155}
-  queenEmergeTimeAfterWarning: 5
+  queenEmergeTimeAfterWarning: 6
   soilderEmergeTimeAfterQueen: 3
 --- !u!114 &1535450932
 MonoBehaviour:
@@ -2847,6 +2848,18 @@ MonoBehaviour:
   - {fileID: 606986718}
   fullHeart: {fileID: 21300038, guid: f0a7cb90eb5c94b469cfb8bd3c88e0f7, type: 3}
   emptyHeart: {fileID: 21300040, guid: f0a7cb90eb5c94b469cfb8bd3c88e0f7, type: 3}
+--- !u!114 &1535450934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535450927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4c45b56a5cfaf4ab97dc36215359c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1788334333
 GameObject:
   m_ObjectHideFlags: 0

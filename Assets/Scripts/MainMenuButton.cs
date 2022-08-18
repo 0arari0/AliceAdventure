@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuButton : MonoBehaviour
 {
@@ -16,13 +17,20 @@ public class MainMenuButton : MonoBehaviour
         gameStartButton.GetComponent<Button>().enabled = true;
     }
 
+    public void PlayHotGirl()
+    {
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.HotGirl);
+    }
+
     public void SelectGameStartButton()
     {
         // 메인 메뉴에서 게임 시작 버튼 눌렀을 때 실행
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         gameStartButton.GetComponent<Button>().enabled = false;
         Time.timeScale = 1f;
+        SoundManager.instance.bgmPlayer.Stop();
         GameManager.instance.StartCoroutine(GameManager.instance.CorLoadNextScene());
+        //SceneManager.LoadScene("BattleRound2");
     }
 
     public void SelectHowPlayButton()

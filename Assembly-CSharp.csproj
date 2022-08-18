@@ -61,11 +61,13 @@
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\BuildBattleRound1.cs" />
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\BulletCleaner.cs" />
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\CheckBossTime.cs" />
+     <Compile Include="Assets\Scripts\BattleRound1 Scripts\SpadeMasterHpBar.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\BuildBattleRound2.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\Queen.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\QueenAttack.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\QueenSoilderMove.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\QueenSoilderSpawner.cs" />
+     <Compile Include="Assets\Scripts\BattleRound2 Scripts\QueenSound.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\RoseBullet.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\SoldierInfo.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\Warning.cs" />
@@ -81,6 +83,7 @@
      <Compile Include="Assets\Scripts\MainMenuButton.cs" />
      <Compile Include="Assets\Scripts\MainMenuCloud.cs" />
      <Compile Include="Assets\Scripts\ObjectPool.cs" />
+     <Compile Include="Assets\Scripts\OpeningStory.cs" />
      <Compile Include="Assets\Scripts\OptionManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerAttackPrefab.cs" />

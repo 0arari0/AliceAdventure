@@ -1,8 +1,9 @@
 Win64
 PlayerPath?
-C:/Users/siggn/Desktop/AliceAdventure_v1.3/AliceAdventure.exe
+C:/Users/nada9/Downloads/SiMaEl Ver1.5/SiMaEl.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
+Assets/Scenes/OpeningStory.unity
 Assets/Scenes/BattleRound1.unity
 Assets/Scenes/BattleRound2.unity
 SceneListEnd?
@@ -21,7 +22,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-2744377b7d4551bf5719fc5270775891 Assembly-CSharp.dll:.MainMenuButton
+3c61316cd08dbd10fb1367267839961d Assembly-CSharp.dll:.MainMenuButton
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
 a3af1f6e272c4d9983764c4d63c6b02a Assembly-CSharp.dll:.StripeFade
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -106,7 +107,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.P
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 4e9333594897a1fb8b136ad2eae996c7 Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 86011b7837be0353703556e001edce8b Assembly-CSharp.dll:.QueenAttack
-9330f0419da64020b67a491b6f328851 Assembly-CSharp.dll:.Player
+8aa8f8c9537bac16ed124fb38b8e6c15 Assembly-CSharp.dll:.Player
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -128,7 +129,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 a4f893e4e1de92eb846c16fb18043228 Assembly-CSharp.dll:.BigSpadeBullet1
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-83e769eee07fc231384c812eedbb8224 Assembly-CSharp.dll:.ItemShield
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ItemShield
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Singleton
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 cd15d830f3d775f1f16a1a350fbbe607 Assembly-CSharp.dll:.RoseBullet
@@ -179,6 +180,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 459b50185a167c1d210a783633c72823 Assembly-CSharp.dll:.SmallSpadeBullet
+ef255942c35b8c51332191069b18f785 Assembly-CSharp.dll:.BuildBattleRound1
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 371d689ee6cf2fb74ec341ea60b93de6 Assembly-CSharp.dll:.Item
 926fc459dc2d5771c581425314c108f7 Assembly-CSharp.dll:.CardSoldier
@@ -194,4 +196,6 @@ afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.RectTransformMove
 26260e6ff15dc4d1e317bf6e079faa27 Assembly-CSharp.dll:.BattleRoundUI
 9f14c0c98a4ddaf21a7e24c715a7c15f Assembly-CSharp.dll:.SoundManager
 179414a3220a36afe9b06860c5f024c2 Assembly-CSharp.dll:.SpadeMaster
-ef255942c35b8c51332191069b18f785 Assembly-CSharp.dll:.BuildBattleRound1
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.QueenSound
+b4e2273de058b6ede26924348c2790aa Assembly-CSharp.dll:.SpadeMasterHpBar
+3a5aeb7bd28b4f706d831b521e52d745 Assembly-CSharp.dll:.OpeningStory

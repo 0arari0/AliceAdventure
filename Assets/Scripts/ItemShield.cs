@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class ItemShield : MonoBehaviour
 {
+    void FixedUpdate()
+    {
+        transform.position = Player.instance.transform.position;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag.Equals("SpadeBullet"))
         {
-            Player.instance.shieldEnable = false;
+            Destroy(this.gameObject);
             Destroy(other.gameObject);
         }
         else if (other.tag.Equals("Soldier"))
         {
-            Debug.Log("HI");
-            Player.instance.shieldEnable = false;
+            Destroy(this.gameObject);
             other.GetComponent<CardSoldier>().SoldierDead();
         }
         else if (other.tag.Equals("QueenBullet"))
         {
-            Player.instance.shieldEnable = false;
+            Destroy(this.gameObject);
             ObjectPool.instance.ReturnQueenBullet(other.gameObject.GetComponent<RoseBullet>());
         }
     }

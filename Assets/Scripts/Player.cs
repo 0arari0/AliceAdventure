@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     const float itemDuration = 4f;
     float speedUpDuration = 0;
     float damageUpDuration = 0;
-    public bool shieldEnable = false;
+    //public bool shieldEnable = false;
     public GameObject itemShield;
 
     public bool isAlive { get; private set; }
@@ -55,11 +55,19 @@ public class Player : MonoBehaviour
             this.battleRoundUI = battleRoundUI;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            shieldEnable = true;
+            Instantiate(itemShield, transform.position, Quaternion.identity);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            damageUpDuration = 4f;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            speedUpDuration = 4f;
         }
     }
 
@@ -88,7 +96,6 @@ public class Player : MonoBehaviour
         attackSpeed = 6f;
         rbMove.InitializeSpeed();
         playerDamage = 1;
-        shieldEnable = false;
 
         speedUpDuration = 0f;
         damageUpDuration = 0f;
@@ -118,7 +125,6 @@ public class Player : MonoBehaviour
         AttackStop();
         CheckItemDurationStop();
     }
-
     public void MoveStart()
     {
         if (_move == null)
@@ -179,7 +185,16 @@ public class Player : MonoBehaviour
             // 시계가 플레이어 정수리에서 발사되도록 하였음
             GameObject obj = Instantiate(attackPrefab, rbMove.GetPosition() + new Vector2(18, 32), Quaternion.identity);
             PlayerAttackPrefab script = obj.GetComponent<PlayerAttackPrefab>();
-            script.SetDamage(playerDamage);
+            if (Random.Range(0, 10) == 0)
+            {
+                script.SetDamage(playerDamage * 2);
+                obj.GetComponent<SpriteRenderer>().color = new Color(1, 0, 1, 1);
+            }
+            else
+            {
+                script.SetDamage(playerDamage);
+                obj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            }
             if (isEnhenced)
                 script.SetHardAttack();
             else
@@ -199,7 +214,10 @@ public class Player : MonoBehaviour
                 damageUpDuration = itemDuration;
                 break;
             case Item.ItemType_.Shield: // 방어막 아이템 획득
-                shieldEnable = true;
+                if (GameObject.FindGameObjectsWithTag("Shield").Length == 0)
+                {
+                    Instantiate(itemShield, transform.position, Quaternion.identity);
+                }
                 break;
         }
     }
@@ -240,11 +258,6 @@ public class Player : MonoBehaviour
                 isEnhenced = false;
                 playerDamage = 1;
             }
-
-            if (shieldEnable == true)
-                itemShield.SetActive(true);
-            else
-                itemShield.SetActive(false);
 
             yield return null;
         }

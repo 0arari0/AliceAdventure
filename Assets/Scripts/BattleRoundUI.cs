@@ -27,21 +27,31 @@ public class BattleRoundUI : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape)) // esc 눌렀을 때
         {
-            if (panelPause.activeSelf) OnClickBack(); // 일시정지 윈도우 켜져있으면 닫기
-            else OnClickPause(); // 일시정지 윈도우 꺼져있으면 일시정지
+            if (panelPause.activeSelf)
+            {
+                Time.timeScale = 1f;
+                panelPause.SetActive(false);
+                // 일시정지 윈도우 켜져있으면 닫기
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                panelPause.SetActive(true);
+                // 일시정지 윈도우 꺼져있으면 일시정지
+            }
         }
     }
     public void OnClickPause()
     {
         Time.timeScale = 0f;
         panelPause.SetActive(true);
-        //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
     }
     public void OnClickBack()
     {
         Time.timeScale = 1f;
         panelPause.SetActive(false);
-        //SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
     }
     public void OnClickOption()
     {

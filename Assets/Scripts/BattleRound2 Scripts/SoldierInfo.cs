@@ -32,8 +32,8 @@ public class SoldierInfo : MonoBehaviour
         if (maxHp <= 0)
         {
             maxHp = 3;
-            curHp = maxHp;
         }
+        curHp = maxHp;
         if (score < 0)
             score = 100;
     }

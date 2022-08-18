@@ -18,11 +18,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] sfxArr;
     public enum BGM_Name_
     {
-        MainMenu, Round1, Round2
+        MainMenu, Round1, Round1Boss, Round2Boss, OpeningStory
     }
     public enum SFX_Name_
     {
-        ButtonClick, EnemyAttacked, EnemyDead, GetItem
+        ButtonClick, EnemyAttacked, EnemyDead, GetItem, Queen, HotGirl
     }
     void Awake()
     {

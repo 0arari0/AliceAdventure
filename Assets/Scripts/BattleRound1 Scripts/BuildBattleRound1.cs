@@ -14,6 +14,12 @@ public class BuildBattleRound1 : MonoBehaviour
     {
         checkBossTime = canvasInfo.GetComponent<CheckBossTime>();
     }
+
+    void Start()
+    {
+        SoundManager.instance.PlayBgm(SoundManager.BGM_Name_.Round1);
+    }
+
     void OnEnable()
     {
         checkBossTime.TimeValueSliderOff();

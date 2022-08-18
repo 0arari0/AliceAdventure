@@ -23,6 +23,10 @@ public class SpadeMaster : MonoBehaviour
     public bool isAlive { get; private set; } = true;
     public bool isAttacked { get; private set; } = false;
 
+    public float CurHp { get { return curHp; } }
+
+    public float MaxHp { get { return maxHp; } }
+
     Animator animator;
     SpriteRenderer spriteRenderer;
     Coroutine _act = null;
@@ -43,6 +47,7 @@ public class SpadeMaster : MonoBehaviour
     void Start()
     {
         _act = StartCoroutine(_Act());
+        SoundManager.instance.PlayBgm(SoundManager.BGM_Name_.Round1Boss);
     }
 
     IEnumerator _Act()
@@ -77,6 +82,12 @@ public class SpadeMaster : MonoBehaviour
         if (isAttacked) yield break; // 공격 받는 동안은 무적
         isAttacked = true;
         curHp -= damage;
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
+        spriteRenderer.color = colorAttacked;
+        yield return new WaitForSeconds(0.1f); // 0.1초간 피격 효과
+        spriteRenderer.color = colorOrigin;
+        isAttacked = false;
+
         if (curHp <= 0) // 1라 보스 소멸
         {
             isAlive = false;
@@ -90,15 +101,19 @@ public class SpadeMaster : MonoBehaviour
                 spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
                 yield return null;
             }
-            GameManager.instance.LoadNextScene();
             Destroy(gameObject); // 1라 보스 파괴
-            yield break;
+            ClearSpade();
+            SoundManager.instance.bgmPlayer.Stop();
+            GameManager.instance.LoadNextScene();
         }
-        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
-        spriteRenderer.color = colorAttacked;
-        yield return new WaitForSeconds(0.1f); // 0.1초간 피격 효과
-        spriteRenderer.color = colorOrigin;
-        isAttacked = false;
+    }
+
+    void ClearSpade()
+    {
+        for(int i=0;i<GameObject.FindGameObjectsWithTag("SpadeBullet").Length;i++)
+        {
+            Destroy(GameObject.FindGameObjectsWithTag("SpadeBullet")[i].gameObject);
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
