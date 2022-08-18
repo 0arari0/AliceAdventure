@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,7 +10,6 @@ public class Player : MonoBehaviour
      */
 
     public static Player instance = null;
-    public int stageScore = 0;
     const int lockPositionX = 280;
     [SerializeField] GameObject attackPrefab; // 앨리스가 던지는 시계 투사체
     [SerializeField] float attackSpeed = 6f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     public bool isAlive { get; private set; }
     public bool isAttacked { get; private set; }
+    public bool isEnhenced { get; private set; }
     public int playerHp { get; private set; }
     [SerializeField] int playerDamage = 1;
 
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour
 
         isAlive = true;
         isAttacked = false;
+        isEnhenced = false;
         playerHp = 3;
         attackSpeed = 6f;
         rbMove.InitializeSpeed();
@@ -147,7 +149,12 @@ public class Player : MonoBehaviour
     {
         // 시계가 플레이어 정수리에서 발사되도록 하였음
         GameObject obj = Instantiate(attackPrefab, rbMove.GetPosition() + new Vector2(18, 32), Quaternion.identity);
-        obj.GetComponent<PlayerAttackPrefab>().SetDamage(playerDamage);
+        PlayerAttackPrefab script = obj.GetComponent<PlayerAttackPrefab>();
+        script.SetDamage(playerDamage);
+        if (isEnhenced)
+            script.SetHardAttack();
+        else
+            script.SetNormalAttack();
     }
 
     IEnumerator C_Attack()
@@ -179,14 +186,20 @@ public class Player : MonoBehaviour
             speedUpDuration -= Time.deltaTime;
             rbMove.SetSpeed(300f);
         }
-        else rbMove.InitializeSpeed();
+        else
+            rbMove.InitializeSpeed();
 
         if (damageUpDuration > 0)
         {
+            isEnhenced = true;
             damageUpDuration -= Time.deltaTime;
             playerDamage = 2;
         }
-        else playerDamage = 1;
+        else
+        {
+            isEnhenced = false;
+            playerDamage = 1;
+        }
 
         if (shieldEnable == true)
         {
@@ -227,7 +240,7 @@ public class Player : MonoBehaviour
         battleRoundUI.SetActiveOnPanelGameover();
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag.Equals("Item")) // 아이템 충돌
         {

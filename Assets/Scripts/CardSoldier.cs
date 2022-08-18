@@ -126,8 +126,8 @@ public class CardSoldier : MonoBehaviour
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
         SpawnItem(Random.Range(1, 21));
-        GameObject.Find("Main Camera").GetComponent<ScoreAndHeart>().AddScore(score);
         isDead = true;
+        GameManager.instance.AddScore(score);
     }
 
     void OnTriggerEnter2D(Collider2D other)

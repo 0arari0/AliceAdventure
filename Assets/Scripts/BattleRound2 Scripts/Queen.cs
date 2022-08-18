@@ -44,6 +44,8 @@ public class Queen : MonoBehaviour, IMove
     [Range(0, 100)]
     int movingIntervalTimeErrorPercent; // 움직임 사이 멈추는 시간 오차 퍼센트(10% 이면 +-10% 적용)
 
+    int score = 2000;
+
     void Awake()
     {
         scriptRB2DMove = GetComponent<RigidBody2DMove>();
@@ -80,6 +82,7 @@ public class Queen : MonoBehaviour, IMove
         {
             isAlive = false;
             GameManager.instance.isClear = true;
+            GameManager.instance.AddScore(score);
             animator.speed = 0f; // 애니메이션 중지
             StopCoroutine(corCurPattern); // 부분 이동 중지
             StopCoroutine(corMovePattern); // 전체 이동 중지

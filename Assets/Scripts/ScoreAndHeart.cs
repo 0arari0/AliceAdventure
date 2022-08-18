@@ -11,19 +11,10 @@ public class ScoreAndHeart : MonoBehaviour
     public Sprite emptyHeart;
     void Update()
     {
-        scoreValueText.text = Player.instance.stageScore.ToString();
+        scoreValueText.text = GameManager.instance.stageScore.ToString();
         RefreshHeartNum();
     }
 
-    public void InitScore()
-    {
-        Player.instance.stageScore = 0;
-    }
-
-    public void AddScore(int _score)
-    {
-        Player.instance.stageScore += _score;
-    }
     void RefreshHeartNum()
     {
         for (int i = 0; i < 3; i++)

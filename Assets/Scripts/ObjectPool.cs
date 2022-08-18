@@ -27,6 +27,8 @@ public class ObjectPool : MonoBehaviour
         if (queenBulletQ.Count == 0)
             return Instantiate(queenBullet);
         GameObject obj = queenBulletQ.Dequeue();
+        if (obj == null)
+            return Instantiate(queenBullet);
         obj.SetActive(true);
         return obj;
     }

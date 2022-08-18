@@ -6,6 +6,6 @@ public class SetResolutionTest : MonoBehaviour
 {
     void Start()
     {
-        Screen.SetResolution(720, 960, false);
+        Screen.SetResolution(720, 960, false); // PC 버전만
     }
 }

@@ -12,6 +12,7 @@ public class SpadeMaster : MonoBehaviour
     [Range(1, 500)]
     float maxHp;
     float curHp;
+    int score = 1000;
 
     public GameObject[] bigSpadeBullets;
     public  float bulletTime = 1.5f;
@@ -80,6 +81,7 @@ public class SpadeMaster : MonoBehaviour
         {
             isAlive = false;
             GameManager.instance.isClear = true;
+            GameManager.instance.AddScore(score);
             animator.speed = 0f; // 애니메이션 중지
             StopCoroutine(_act); // 1라 보스 모든 행동 중지
             for (int i = 0; i < 50; i++) // 1라 보스 점차 희미하게 사라짐

@@ -58,8 +58,8 @@ public class SoldierInfo : MonoBehaviour
         int percentage = Random.Range(0, 101);
         if (percentage <= dropPercentage)
             Instantiate(items[Random.Range(0, items.Length)], gameObject.transform.position, Quaternion.identity);
-        GameObject.Find("Main Camera").GetComponent<ScoreAndHeart>().AddScore(score);
         isAlive = false;
+        GameManager.instance.AddScore(score);
     }
 
     void OnTriggerEnter2D(Collider2D other)

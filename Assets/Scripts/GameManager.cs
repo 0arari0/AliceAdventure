@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour
     Dictionary<string, int> _numberOfScene; // Scene 넘버 저장
     int _curSceneIdx;
 
+    public int stageScore { get; private set; }
+
     public bool isClear { get; set; } // 해당 Scene을 클리어했는가?
+
+    StripeFade stripeFade;
 
     void Awake()
     {
@@ -30,47 +34,52 @@ public class GameManager : MonoBehaviour
         _curSceneIdx = 0;
 
         isClear = false;
+        InitializeScore();
+
+        stripeFade = StripeFade.instance;
     }
 
-    public void LoadScene(string name)
+    public void InitializeScore()
     {
-        try
-        {
-            SceneManager.LoadScene(name);
-            _curSceneIdx = _numberOfScene[name];
-
-            isClear = false;
-        }
-        catch
-        {
-            Debug.Log("Wrong Scene Name!");
-        }
-        finally
-        {
-
-        }
+        stageScore = 0;
     }
-    public void LoadNextScene()
+    public void AddScore(int score)
     {
-        try
-        {
-            _curSceneIdx++;
-            if (_curSceneIdx >= sceneNames.Length)
-            {
-                _curSceneIdx--;
-                return;
-            }
-            SceneManager.LoadScene(sceneNames[_curSceneIdx]);
+        if (score < 0) return;
+        stageScore += score;
+    }
 
-            isClear = false;
-        }
-        catch
-        {
-            Debug.Log("Wrong Scene Index!");
-        }
-        finally
-        {
+    public void LoadScene(string name) // 함수로 실행시키는 경우 동시 실행 가능
+    {
+        StartCoroutine(CorLoadScene(name));
+    }
+    public void LoadNextScene() // 함수로 실행시키는 경우 동시 실행 가능
+    {
+        StartCoroutine(CorLoadNextScene());
+    }
+    public IEnumerator CorLoadScene(string name) // 직접 코루틴을 실행시키는 경우 해당 시간을 기다려야 다음 코드 실행
+    {
+        yield return stripeFade.StartCoroutine(stripeFade.FadeOut());
 
+        SceneManager.LoadScene(name);
+        _curSceneIdx = _numberOfScene[name];
+        isClear = false;
+
+        yield return stripeFade.StartCoroutine(stripeFade.FadeIn());
+    }
+    public IEnumerator CorLoadNextScene() // 직접 코루틴을 실행시키는 경우 해당 시간을 기다려야 다음 코드 실행
+    {
+        yield return stripeFade.StartCoroutine(stripeFade.FadeOut());
+
+        _curSceneIdx++;
+        if (_curSceneIdx >= sceneNames.Length)
+        {
+            _curSceneIdx--;
+            yield break;
         }
+        SceneManager.LoadScene(sceneNames[_curSceneIdx]);
+        isClear = false;
+
+        yield return stripeFade.StartCoroutine(stripeFade.FadeIn());
     }
 }

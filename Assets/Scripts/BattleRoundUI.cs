@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleRoundUI : MonoBehaviour
 {
@@ -51,25 +52,32 @@ public class BattleRoundUI : MonoBehaviour
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         Time.timeScale = 1f;
-        GameManager.instance.LoadScene("MainMenu");
+        GameManager.instance.InitializeScore();
+        GameManager.instance.StartCoroutine(GameManager.instance.CorLoadScene("MainMenu"));
     }
     public void OnClickReplay()
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         Time.timeScale = 1f;
-        GameManager.instance.LoadScene("BattleRound1");
+        GameManager.instance.InitializeScore();
+        GameManager.instance.StartCoroutine(GameManager.instance.CorLoadScene("BattleRound1"));
     }
     public void OnClickHome()
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         Time.timeScale = 1f;
-        GameManager.instance.LoadScene("MainMenu");
+        GameManager.instance.InitializeScore();
+        GameManager.instance.StartCoroutine(GameManager.instance.CorLoadScene("MainMenu"));
     }
 
     public void SetActiveOnPanelGameover()
     {
+        if (SceneManager.GetActiveScene().name == "BattleRound2" && panelWin.activeSelf)
+            panelWin.SetActive(false);
         Time.timeScale = 0f;
         panelGameover.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "BattleRound2" && panelWin.activeSelf)
+            panelWin.SetActive(false);
     }
     public void SetActiveOnPanelWin()
     {

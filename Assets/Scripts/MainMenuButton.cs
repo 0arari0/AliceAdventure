@@ -17,7 +17,7 @@ public class MainMenuButton : MonoBehaviour
         //playerParent.transform.GetChild(0).gameObject.SetActive(false);
         //playerParent.transform.GetChild(0).gameObject.SetActive(true);
         Time.timeScale = 1f;
-        GameManager.instance.LoadNextScene();
+        GameManager.instance.StartCoroutine(GameManager.instance.CorLoadNextScene());
     }
 
     public void SelectHowPlayButton()

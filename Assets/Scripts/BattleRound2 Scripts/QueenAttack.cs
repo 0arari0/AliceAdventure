@@ -57,13 +57,13 @@ public class QueenAttack : MonoBehaviour
 
     public void AttackStart()
     {
-        if (_totalAttack == null)
+        if (_totalAttack == null && gameObject.activeSelf)
             _totalAttack = StartCoroutine(_AttackStart());
     }
     IEnumerator _AttackStart()
     {
         yield return new WaitForSeconds(secondsToAttack);
-        while (true)
+        while (true && gameObject.activeSelf)
         {
             _corAttack = StartCoroutine(_attackName[Random.Range(0, _kindOfAttack)]);
             yield return new WaitForSeconds(attackRate);
@@ -71,9 +71,16 @@ public class QueenAttack : MonoBehaviour
     }
     public void AttackStop()
     {
-        StopCoroutine(_corAttack);
-        StopCoroutine(_totalAttack);
-        _totalAttack = null;
+        if (_corAttack != null && gameObject.activeSelf)
+        {
+            StopCoroutine(_corAttack);
+            _corAttack = null;
+        }
+        if (_totalAttack != null && gameObject.activeSelf)
+        {
+            StopCoroutine(_totalAttack);
+            _totalAttack = null;
+        }
     }
 
     /// <summary>
@@ -87,7 +94,7 @@ public class QueenAttack : MonoBehaviour
 
     IEnumerator _NormalAttack()
     {
-        for (int i = 0; i < normalBulletCountPerShot; i++)
+        for (int i = 0; i < normalBulletCountPerShot && gameObject.activeSelf; i++)
         {
             ObjectPool.instance.GetQueenBullet().GetComponent<RoseBullet>().Set(
                 (Vector2)transform.position + ModifyFirePos(),
@@ -98,7 +105,7 @@ public class QueenAttack : MonoBehaviour
     }
     IEnumerator _ShotgunAttack()
     {
-        for (int i = 0; i < shotgunBulletCoundPerShot; i++)
+        for (int i = 0; i < shotgunBulletCoundPerShot && gameObject.activeSelf; i++)
             ObjectPool.instance.GetQueenBullet().GetComponent<RoseBullet>().Set(
                 (Vector2)transform.position + ModifyFirePos(),
                 shotgunAttackDegree + Random.Range(-shotgunErrorRangeDegree, shotgunErrorRangeDegree),

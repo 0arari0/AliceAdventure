@@ -7,8 +7,15 @@ public class PlayerAttackPrefab : MonoBehaviour
     const int destroyTime = 4;
     [SerializeField] int damage = 1;
     [SerializeField] float moveSpeed = 500f;
+    [SerializeField] Sprite hardAttack;
+    Sprite normalAttack = null;
+
     public int Damage { get { return damage; } }
 
+    void Awake()
+    {
+        normalAttack = GetComponent<SpriteRenderer>().sprite;
+    }
     void Start()
     {
         Destroy(this.gameObject, destroyTime);
@@ -24,8 +31,12 @@ public class PlayerAttackPrefab : MonoBehaviour
         damage = _dmg;
     }
 
-    public void SetRedColor()
+    public void SetHardAttack()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+        gameObject.GetComponent<SpriteRenderer>().sprite = hardAttack;
+    }
+    public void SetNormalAttack()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = normalAttack;
     }
 }
