@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SetResolutionTest : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         Screen.SetResolution(720, 960, false); // PC 버전만
     }
