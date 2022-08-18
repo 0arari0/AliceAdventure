@@ -249,11 +249,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad05c1a4e95ce3468a8cbe3cd24db93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 4
+  maxHp: 3
   score: 150
-  items:
-  - {fileID: 6822718332764186767, guid: 619a70fd4d72db84194e48a9863eb8c1, type: 3}
-  - {fileID: 3626558805191029461, guid: c921d3c37702fc749b2ee1091fe1bd50, type: 3}
-  - {fileID: 3539241857550396007, guid: fc3b15a6e21ed1047a38266fc89b2b7d, type: 3}
-  dropPercentage: 10
+  speedUpItem: {fileID: 3626558805191029461, guid: c921d3c37702fc749b2ee1091fe1bd50,
+    type: 3}
+  damageUpItem: {fileID: 3539241857550396007, guid: fc3b15a6e21ed1047a38266fc89b2b7d,
+    type: 3}
+  shieldItem: {fileID: 6822718332764186767, guid: 619a70fd4d72db84194e48a9863eb8c1,
+    type: 3}
   attackedWhite: {fileID: 2882888720388377629}

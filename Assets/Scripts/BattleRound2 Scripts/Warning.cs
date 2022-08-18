@@ -28,6 +28,9 @@ public class Warning : MonoBehaviour
 
     IEnumerator Move()
     {
+        Player.instance.AttackStop(); // Warning 표시가 끝날 때까지 앨리스 공격 중지
+        yield return new WaitForSeconds(1f); // Scene 넘어가는 효과 끝날 때까지 조금 기다림
+
         Vector2 pos = rectMove.GetPosition();
         Vector2 screenRight = new Vector2(pos.x, pos.y);
         Vector2 screenMiddle = new Vector2(0f, 150f);
@@ -37,6 +40,8 @@ public class Warning : MonoBehaviour
         yield return new WaitForSeconds(stayDuration);
         yield return rectMove.StartCoroutine(rectMove.MoveStart(screenMiddle, screenLeft));
         yield return new WaitForSeconds(0.2f);
+
+        Player.instance.AttackStart(); // 공격 재개
 
         gameObject.transform.parent.gameObject.SetActive(false); // 다 끝나면 종료
     }

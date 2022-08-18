@@ -81,6 +81,7 @@ public class SpadeMaster : MonoBehaviour
         {
             isAlive = false;
             GameManager.instance.isClear = true;
+            SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
             GameManager.instance.AddScore(score);
             animator.speed = 0f; // 애니메이션 중지
             StopCoroutine(_act); // 1라 보스 모든 행동 중지
@@ -93,8 +94,9 @@ public class SpadeMaster : MonoBehaviour
             Destroy(gameObject); // 1라 보스 파괴
             yield break;
         }
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
         spriteRenderer.color = colorAttacked;
-        yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과
+        yield return new WaitForSeconds(0.1f); // 0.1초간 피격 효과
         spriteRenderer.color = colorOrigin;
         isAttacked = false;
     }

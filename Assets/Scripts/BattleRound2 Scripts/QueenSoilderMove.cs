@@ -5,6 +5,7 @@ using UnityEngine;
 public class QueenSoilderMove : MonoBehaviour, IMove
 {
     [SerializeField]
+    [Range(0f, 10f)]
     float standingTime;
 
     RigidBody2DMove rb2DMove;
@@ -13,16 +14,10 @@ public class QueenSoilderMove : MonoBehaviour, IMove
     {
         // 1번째 호출
         rb2DMove = GetComponent<RigidBody2DMove>();
-
-        ValidCheck();
     }
     void Start()
     {
         StartCoroutine(ObjectMove(rb2DMove.GetPosition()));
-    }
-    void ValidCheck()
-    {
-        if (standingTime < 0f) standingTime = 1f;
     }
 
     public IEnumerator ObjectMove(Vector2 initPos)

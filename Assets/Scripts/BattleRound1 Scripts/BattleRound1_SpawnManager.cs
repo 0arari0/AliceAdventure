@@ -23,6 +23,12 @@ public class BattleRound1_SpawnManager : MonoBehaviour
     bool bossSoldierSpawnCheck = true;
     public GameObject floorBG;
 
+    BuildBattleRound1 buildBattleRound1;
+
+    void Awake()
+    {
+        buildBattleRound1 = Camera.main.GetComponent<BuildBattleRound1>();
+    }
     void Update()
     {
         if (canSpawn)
@@ -41,6 +47,7 @@ public class BattleRound1_SpawnManager : MonoBehaviour
             {
                 Instantiate(spadeMaster, new Vector2(0, 600f), Quaternion.identity);
                 isBossSpawned = true;
+                buildBattleRound1.checkBossTime.TimeValueSliderOn();
             }
             if (bossSoldierSpawnCheck)
             {

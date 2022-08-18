@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemShield : MonoBehaviour
 {
     public GameObject player;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag.Equals("SpadeBullet"))

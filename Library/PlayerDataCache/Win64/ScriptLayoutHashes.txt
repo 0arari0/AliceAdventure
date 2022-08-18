@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/siggn/Desktop/AliceAdventure/AliceAdventure.exe
+C:/Users/siggn/Desktop/AliceAdventure_v1.3/AliceAdventure.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/BattleRound1.unity
@@ -58,7 +58,7 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.FadeCanvas
-66874fa8ee2794b82bade2b07fd6ab55 Assembly-CSharp.dll:.BattleRound1_SoldierBossStage
+95a04068ecf0884bcad0120fe0852bb9 Assembly-CSharp.dll:.BattleRound1_SoldierBossStage
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 507174d46dacbc5fe45e28485db5dd1e UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -126,7 +126,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 306a0cccfb313ccd8d90fe5e07d6e054 Assembly-CSharp.dll:.QueenSoilderSpawner
 40d07fc273fc4d3366d8a72f356411e6 Assembly-CSharp.dll:.PlayerAttackPrefab
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
-ae303e3d1245bc912de633fb01ed4256 Assembly-CSharp.dll:.BigSpadeBullet1
+a4f893e4e1de92eb846c16fb18043228 Assembly-CSharp.dll:.BigSpadeBullet1
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 83e769eee07fc231384c812eedbb8224 Assembly-CSharp.dll:.ItemShield
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Singleton
@@ -134,7 +134,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 cd15d830f3d775f1f16a1a350fbbe607 Assembly-CSharp.dll:.RoseBullet
 3a960223c337dc7b13fd6923520f5720 Assembly-CSharp.dll:.BattleRound1_SpawnManager
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-5c3f9130a55e6874ae7553180a10b8f0 Assembly-CSharp.dll:.BigSpadeBullet
+6cde4ac39ae427d49eaa40df89a635e9 Assembly-CSharp.dll:.BigSpadeBullet
 e09a09c8dfa0f518fc0f45244b2ef413 Assembly-CSharp.dll:.Queen
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -151,7 +151,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 ff04e4b4676f1d87a8ae7107638135f1 Assembly-CSharp.dll:.CheckBossTime
-bc2ec651a93133b994f9a70c5bc3ea69 Assembly-CSharp.dll:.SoldierInfo
+be834aed64c3cd7c7a259c96f7d75ce6 Assembly-CSharp.dll:.SoldierInfo
 38ed65fa476dd605fb9590bb21050068 Assembly-CSharp.dll:.BuildBattleRound2
 a9f049c3dc82bb36fdb142e4d6a2658d Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
@@ -194,3 +194,4 @@ afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.RectTransformMove
 26260e6ff15dc4d1e317bf6e079faa27 Assembly-CSharp.dll:.BattleRoundUI
 9f14c0c98a4ddaf21a7e24c715a7c15f Assembly-CSharp.dll:.SoundManager
 179414a3220a36afe9b06860c5f024c2 Assembly-CSharp.dll:.SpadeMaster
+ef255942c35b8c51332191069b18f785 Assembly-CSharp.dll:.BuildBattleRound1

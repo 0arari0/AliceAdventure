@@ -11,7 +11,7 @@ public class CardSoldier : MonoBehaviour
     const int moveSpeedX = 60;
     public int soldierHp;
     public float moveSpeed;
-    bool isDead = false;
+    public bool isDead { get; private set; } = false;
     float deadTime = 1.16f;
     int score;
     public SoldierType_ soldierType;
@@ -20,7 +20,6 @@ public class CardSoldier : MonoBehaviour
     [SerializeField] GameObject shieldItem;
     Vector3 playerPosition;
     bool catchPlayerPosition = false;
-    GameObject player;
     public bool isAttacked = false;
     public GameObject attackedWhite;
 
@@ -34,7 +33,6 @@ public class CardSoldier : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         switch (soldierType)
         {
             // 카드 병사의 타입에 따라서 점수 변경
@@ -77,7 +75,7 @@ public class CardSoldier : MonoBehaviour
                 if (transform.position.y > 0f)
                 {
                     transform.Translate(new Vector2(0, -1 * moveSpeed * Time.deltaTime));
-                    playerPosition = player.gameObject.transform.position;
+                    playerPosition = Player.instance.transform.position;
                 }
                 else
                 {
@@ -90,7 +88,6 @@ public class CardSoldier : MonoBehaviour
                     transform.Translate((playerPosition - transform.position).normalized * Time.deltaTime * moveSpeed * 1.25f);
                 }
                 break;
-
             case SoldierType_.Heart:
                 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
                 transform.Translate(new Vector2((playerPosition - transform.position).normalized.x * Time.deltaTime * moveSpeedX, -1 * Time.deltaTime * moveSpeed));
@@ -103,31 +100,24 @@ public class CardSoldier : MonoBehaviour
         }
     }
 
-    void SpawnItem(int num)
+    void SpawnItem()
     {
-        switch (num)
-        {
-            case 0:case 1:
-                Instantiate(speedUpItem, gameObject.transform.position, Quaternion.identity);
-                break;
-            case 2:
-                Instantiate(damageUpItem, gameObject.transform.position, Quaternion.identity);
-                break;
-            case 3:
-                Instantiate(shieldItem, gameObject.transform.position, Quaternion.identity);
-                break;
-            default:
-                break;
-        }
+        int percentage = Random.Range(0, 100);
+        if (percentage < 10)
+            Instantiate(speedUpItem, gameObject.transform.position, Quaternion.identity);
+        else if (percentage < 15)
+            Instantiate(damageUpItem, gameObject.transform.position, Quaternion.identity);
+        else if (percentage < 20)
+            Instantiate(shieldItem, gameObject.transform.position, Quaternion.identity);
     }
 
     public void SoldierDead()
     {
+        isDead = true;
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
-        SpawnItem(Random.Range(1, 21));
-        isDead = true;
         GameManager.instance.AddScore(score);
+        SpawnItem();
     }
 
     void OnTriggerEnter2D(Collider2D other)

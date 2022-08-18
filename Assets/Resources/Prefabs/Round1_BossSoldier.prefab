@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 150
   goRight: 1
-  soldierHp: 4
+  soldierHp: 3
   soldierWhite: {fileID: 6984324952217426561}
   Soldiersprite:
   - {fileID: 21300002, guid: 9f0d2e3325c0b0043b5be2e0596295b8, type: 3}
@@ -183,6 +183,12 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 9f0d2e3325c0b0043b5be2e0596295b8, type: 3}
   - {fileID: 21300000, guid: 4081fd2f83ece7c48971c9030d3e89ef, type: 3}
   score: 100
+  speedUpItem: {fileID: 3626558805191029461, guid: c921d3c37702fc749b2ee1091fe1bd50,
+    type: 3}
+  damageUpItem: {fileID: 3539241857550396007, guid: fc3b15a6e21ed1047a38266fc89b2b7d,
+    type: 3}
+  shieldItem: {fileID: 6822718332764186767, guid: 619a70fd4d72db84194e48a9863eb8c1,
+    type: 3}
 --- !u!61 &6984324953501355114
 BoxCollider2D:
   m_ObjectHideFlags: 0

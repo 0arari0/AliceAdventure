@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\BattleRound1_SpawnManager.cs" />
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\BGRolling.cs" />
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\BigSpadeBullet1.cs" />
+     <Compile Include="Assets\Scripts\BattleRound1 Scripts\BuildBattleRound1.cs" />
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\BulletCleaner.cs" />
      <Compile Include="Assets\Scripts\BattleRound1 Scripts\CheckBossTime.cs" />
      <Compile Include="Assets\Scripts\BattleRound2 Scripts\BuildBattleRound2.cs" />

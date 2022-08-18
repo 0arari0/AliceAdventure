@@ -14,6 +14,10 @@ public class BattleRound1_SoldierBossStage : MonoBehaviour
     bool canMove = true;
     public int score;
 
+    [SerializeField] GameObject speedUpItem;
+    [SerializeField] GameObject damageUpItem;
+    [SerializeField] GameObject shieldItem;
+
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = Soldiersprite[Random.Range(0, 4)];
@@ -35,6 +39,7 @@ public class BattleRound1_SoldierBossStage : MonoBehaviour
         }
         if (isDead)
         {
+            SpawnItem();
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, GetComponent<SpriteRenderer>().color.a - Time.deltaTime * 4f);
             if (GetComponent<SpriteRenderer>().color.a <= 0) Destroy(gameObject);
@@ -48,15 +53,26 @@ public class BattleRound1_SoldierBossStage : MonoBehaviour
             Destroy(other.gameObject);
             if (soldierHp <= 0)
             {
-                // SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
+                SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
                 isDead = true;
             }
             else
             {
-                // SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
+                SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
                 isAttacked = true;
                 soldierWhite.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             }
         }
+    }
+
+    void SpawnItem()
+    {
+        int percentage = Random.Range(0, 100);
+        if (percentage < 10)
+            Instantiate(speedUpItem, gameObject.transform.position, Quaternion.identity);
+        else if (percentage < 15)
+            Instantiate(damageUpItem, gameObject.transform.position, Quaternion.identity);
+        else if (percentage < 20)
+            Instantiate(shieldItem, gameObject.transform.position, Quaternion.identity);
     }
 }

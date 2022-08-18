@@ -14,7 +14,11 @@ public class BigSpadeBullet1 : MonoBehaviour
     public float moveSpeed = 400f;
     public int smallSpadeBulletNum;
     bool isStop = false;
-    public float limitPositionY;
+    float limitPositionY = 0;
+    void OnEnable()
+    {
+        limitPositionY = Random.Range(-50f, 90f);
+    }
     void Update()
     {
         if (transform.position.y < limitPositionY)

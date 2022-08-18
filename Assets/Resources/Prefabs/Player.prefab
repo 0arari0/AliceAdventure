@@ -152,7 +152,6 @@ MonoBehaviour:
   playerDamage: 1
   enterStart: {x: 0, y: -550}
   enterEnd: {x: 0, y: -300}
-  battleRoundUI: {fileID: 0}
 --- !u!95 &95250408256850786
 Animator:
   serializedVersion: 3
@@ -211,8 +210,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6201814215702042962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 600, y: 600, z: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 5762845116501471175}
   m_RootOrder: 0
@@ -254,7 +253,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 025ff8e9e792a05418325c091810287c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.37254903}
   m_FlipX: 0
   m_FlipY: 0
@@ -280,4 +279,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 40
+  m_Radius: 45

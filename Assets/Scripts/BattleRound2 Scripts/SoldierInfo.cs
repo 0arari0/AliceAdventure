@@ -13,10 +13,11 @@ public class SoldierInfo : MonoBehaviour
     float deadTime = 1.16f;
 
     [SerializeField]
-    GameObject[] items;
+    GameObject speedUpItem;
     [SerializeField]
-    [Range(0, 100)]
-    int dropPercentage;
+    GameObject damageUpItem;
+    [SerializeField]
+    GameObject shieldItem;
     [SerializeField]
     GameObject attackedWhite;
 
@@ -54,19 +55,28 @@ public class SoldierInfo : MonoBehaviour
 
     void SoldierDead()
     {
-        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
-        int percentage = Random.Range(0, 101);
-        if (percentage <= dropPercentage)
-            Instantiate(items[Random.Range(0, items.Length)], gameObject.transform.position, Quaternion.identity);
         isAlive = false;
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
         GameManager.instance.AddScore(score);
+        SpawnItem();
+    }
+
+    void SpawnItem()
+    {
+        int percentage = Random.Range(0, 100);
+        if (percentage < 10)
+            Instantiate(speedUpItem, gameObject.transform.position, Quaternion.identity);
+        else if (percentage < 15)
+            Instantiate(damageUpItem, gameObject.transform.position, Quaternion.identity);
+        else if (percentage < 20)
+            Instantiate(shieldItem, gameObject.transform.position, Quaternion.identity);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag.Equals("Player"))
             SoldierDead();
-        if (other.tag.Equals("PlayerAttack"))
+        else if (other.tag.Equals("PlayerAttack"))
         {
             curHp -= other.GetComponent<PlayerAttackPrefab>().Damage;
             Destroy(other.gameObject); // 앨리스 총알 제거

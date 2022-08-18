@@ -95,6 +95,5 @@ MonoBehaviour:
   timeBlock: 0.04
   smallSpadeBullet: {fileID: 1987223744518148729, guid: aa7598501e324424da0c7af4e3b4b401,
     type: 3}
-  moveSpeed: 400
-  smallSpadeBulletNum: 16
-  limitPositionY: 0
+  moveSpeed: 350
+  smallSpadeBulletNum: 12

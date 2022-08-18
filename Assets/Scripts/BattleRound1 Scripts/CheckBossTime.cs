@@ -6,11 +6,28 @@ using UnityEngine.UI;
 public class CheckBossTime : MonoBehaviour
 {
     public Slider timeValueSlider;
-    public float timeValue;
+    [SerializeField]
+    [Range(20f, 120f)]
+    float timeValue;
+
+    public void TimeValueSliderOn() // 1라 보스 남은 시간 바 활성화
+    {
+        if (!timeValueSlider.gameObject.activeSelf)
+        {
+            timeValueSlider.gameObject.SetActive(true);
+            timeValueSlider.maxValue = timeValue;
+            timeValueSlider.value = timeValueSlider.maxValue;
+        }
+    }
+    public void TimeValueSliderOff() // 1라 보스 남은 시간 바 비활성화
+    {
+        if (timeValueSlider.gameObject.activeSelf)
+            timeValueSlider.gameObject.SetActive(false);
+    }
+
     void OnEnable()
     {
-        timeValueSlider.maxValue = timeValue;
-        timeValueSlider.value = timeValueSlider.maxValue;
+        TimeValueSliderOff();
     }
     void Update()
     {
@@ -20,7 +37,7 @@ public class CheckBossTime : MonoBehaviour
         }
         if (timeValueSlider.value <= 0)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().PlayerGameOver();
+            Player.instance.PlayerGameOver();
         }
     }
 }

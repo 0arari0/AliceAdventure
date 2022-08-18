@@ -83,6 +83,7 @@ public class Queen : MonoBehaviour, IMove
             isAlive = false;
             GameManager.instance.isClear = true;
             GameManager.instance.AddScore(score);
+            SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
             animator.speed = 0f; // 애니메이션 중지
             StopCoroutine(corCurPattern); // 부분 이동 중지
             StopCoroutine(corMovePattern); // 전체 이동 중지
@@ -98,6 +99,7 @@ public class Queen : MonoBehaviour, IMove
             Destroy(gameObject); // 여왕 파괴
             yield break;
         }
+        SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
         spriteRenderer.color = colorAttacked;
         yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과
         spriteRenderer.color = colorOrigin;
@@ -106,11 +108,7 @@ public class Queen : MonoBehaviour, IMove
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            StartCoroutine(GetDamage(other.gameObject.GetComponent<PlayerAttackPrefab>().Damage));
-        }
-        else if (other.tag == "PlayerAttack")
+        if (other.tag == "PlayerAttack")
         {
             StartCoroutine(GetDamage(other.gameObject.GetComponent<PlayerAttackPrefab>().Damage));
             Destroy(other.gameObject); // 플레이어 총알 파괴

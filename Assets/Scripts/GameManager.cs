@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator CorLoadScene(string name) // 직접 코루틴을 실행시키는 경우 해당 시간을 기다려야 다음 코드 실행
     {
         yield return stripeFade.StartCoroutine(stripeFade.FadeOut());
-
+        
         SceneManager.LoadScene(name);
         _curSceneIdx = _numberOfScene[name];
         isClear = false;
