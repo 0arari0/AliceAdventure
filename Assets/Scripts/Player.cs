@@ -39,17 +39,13 @@ public class Player : MonoBehaviour
     Coroutine _move = null; // 움직임 코루틴
     Coroutine _checkItemDuration = null; // 아이템 먹은 상태 체크 코루틴
 
-    public void Activate() // 플레이어 부활
+    public void Activate() // 플레이어 활성화
     {
-        if (gameObject.activeSelf) // 대신 이미 활성화 되어있다면 이 함수 무시
-            return;
         gameObject.SetActive(true);
         battleRoundUI = null;
     }
     public void Deactivate() // 플레이어 비활성화
     {
-        if (!gameObject.activeSelf)
-            return;
         gameObject.SetActive(false);
         battleRoundUI = null;
     }
@@ -57,6 +53,14 @@ public class Player : MonoBehaviour
     {
         if (gameObject.activeSelf)
             this.battleRoundUI = battleRoundUI;
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            shieldEnable = true;
+        }
     }
 
     void Awake()
@@ -84,16 +88,19 @@ public class Player : MonoBehaviour
         attackSpeed = 6f;
         rbMove.InitializeSpeed();
         playerDamage = 1;
-        itemShield.SetActive(false);
+        shieldEnable = false;
+
+        speedUpDuration = 0f;
+        damageUpDuration = 0f;
 
         spriteRenderer.color = new Color(1, 1, 1, 1);
         colorOrigin = spriteRenderer.color;
         colorAttacked = new Color(1f, 0.5f, 0.5f);
         animator.speed = 1f;
 
-        StartCoroutine(Start());
+        StartCoroutine(_Start());
     }
-    IEnumerator Start()
+    IEnumerator _Start()
     {
         rbMove.SetPosition(enterStart);
         yield return rbMove.StartCoroutine(rbMove.MoveStart(enterStart, enterEnd)); // 플레이어 입장
@@ -298,12 +305,20 @@ public class Player : MonoBehaviour
         }
         else if (other.tag.Equals("Soldier")) // 병정들 맞았을 때
         {
-            if (GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
+            if (GameManager.instance.isClear)
+            {// 클리어 됐다면 플레이어는 무적
                 return;
-            if (other.GetComponent<CardSoldier>() != null && !other.GetComponent<CardSoldier>().isDead) // 1라 병정이 죽지 않았다면
+            }
+            if (other.gameObject.GetComponent<CardSoldier>() != null && !other.gameObject.GetComponent<CardSoldier>().isDead) // 1라 병정이 죽지 않았다면
+            {
                 StartCoroutine(GetDamage(1));
-            else if (other.GetComponent<SoldierInfo>() != null && other.GetComponent<SoldierInfo>().isAlive) // 2라 병정이 죽지 않았다면
+                other.gameObject.GetComponent<CardSoldier>().SoldierDead();
+            }
+            else if (other.gameObject.GetComponent<SoldierInfo>() != null && other.gameObject.GetComponent<SoldierInfo>().isAlive) // 2라 병정이 죽지 않았다면
+            {
                 StartCoroutine(GetDamage(1));
+                other.gameObject.GetComponent<SoldierInfo>().SoldierDead();
+            }
         }
     }
 }

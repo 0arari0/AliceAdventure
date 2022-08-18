@@ -13,6 +13,7 @@ public class BattleRound1_SoldierBossStage : MonoBehaviour
     bool isDead = false;
     bool canMove = true;
     public int score;
+    bool isDrop = false;
 
     [SerializeField] GameObject speedUpItem;
     [SerializeField] GameObject damageUpItem;
@@ -39,7 +40,7 @@ public class BattleRound1_SoldierBossStage : MonoBehaviour
         }
         if (isDead)
         {
-            SpawnItem();
+            if (!isDrop) SpawnItem();
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, GetComponent<SpriteRenderer>().color.a - Time.deltaTime * 4f);
             if (GetComponent<SpriteRenderer>().color.a <= 0) Destroy(gameObject);
@@ -67,6 +68,7 @@ public class BattleRound1_SoldierBossStage : MonoBehaviour
 
     void SpawnItem()
     {
+        isDrop = true;
         int percentage = Random.Range(0, 100);
         if (percentage < 10)
             Instantiate(speedUpItem, gameObject.transform.position, Quaternion.identity);

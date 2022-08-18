@@ -12,6 +12,7 @@ TagManager:
   - QueenBullet
   - SpadeBullet
   - EnemyBoss
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -122,8 +122,6 @@ public class CardSoldier : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag.Equals("Player"))
-            SoldierDead();
         if(other.tag.Equals("PlayerAttack"))
         {
             soldierHp -= other.GetComponent<PlayerAttackPrefab>().Damage;

@@ -53,7 +53,7 @@ public class SoldierInfo : MonoBehaviour
         }
     }
 
-    void SoldierDead()
+    public void SoldierDead()
     {
         isAlive = false;
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
@@ -74,9 +74,7 @@ public class SoldierInfo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag.Equals("Player"))
-            SoldierDead();
-        else if (other.tag.Equals("PlayerAttack"))
+        if (other.tag.Equals("PlayerAttack"))
         {
             curHp -= other.GetComponent<PlayerAttackPrefab>().Damage;
             Destroy(other.gameObject); // 앨리스 총알 제거

@@ -3149,8 +3149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4532158eeb90ef44a9e2d7b29d93fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossWaitTime: 10
-  roundTime: 30
+  bossWaitTime: 5
+  roundTime: 5
   spawnPattern: 04000000010000000300000004000000020000000300000004000000010000000200000004000000030000000200000004000000030000000100000004000000
   cardSoldier:
   - {fileID: 6001213084389779796, guid: 7dffef43fd540b54ab1880552f5f90c8, type: 3}

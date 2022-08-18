@@ -101,7 +101,7 @@ public class Queen : MonoBehaviour, IMove
         }
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyAttacked);
         spriteRenderer.color = colorAttacked;
-        yield return new WaitForSeconds(0.2f); // 0.2초간 피격 효과
+        yield return new WaitForSeconds(0.1f); // 0.1초간 피격 효과
         spriteRenderer.color = colorOrigin;
         isAttacked = false;
     }

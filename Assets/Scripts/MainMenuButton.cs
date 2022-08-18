@@ -8,14 +8,19 @@ public class MainMenuButton : MonoBehaviour
 
     public GameObject howPlayWindow; // 조작법 윈도우
     public GameObject howPlayGrayWindow;
+    public GameObject gameStartButton;
+
+    void OnEnable()
+    {
+        Player.instance.Deactivate();
+        gameStartButton.GetComponent<Button>().enabled = true;
+    }
 
     public void SelectGameStartButton()
     {
         // 메인 메뉴에서 게임 시작 버튼 눌렀을 때 실행
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
-        //GameObject playerParent = GameObject.Find("PlayerParent");
-        //playerParent.transform.GetChild(0).gameObject.SetActive(false);
-        //playerParent.transform.GetChild(0).gameObject.SetActive(true);
+        gameStartButton.GetComponent<Button>().enabled = false;
         Time.timeScale = 1f;
         GameManager.instance.StartCoroutine(GameManager.instance.CorLoadNextScene());
     }

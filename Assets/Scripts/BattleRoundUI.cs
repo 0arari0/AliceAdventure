@@ -52,6 +52,8 @@ public class BattleRoundUI : MonoBehaviour
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         Time.timeScale = 1f;
+        Player.instance.ActStop();
+        Player.instance.Deactivate();
         GameManager.instance.InitializeScore();
         GameManager.instance.StartCoroutine(GameManager.instance.CorLoadScene("MainMenu"));
     }
@@ -66,6 +68,8 @@ public class BattleRoundUI : MonoBehaviour
     {
         SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.ButtonClick);
         Time.timeScale = 1f;
+        Player.instance.ActStop();
+        Player.instance.Deactivate();
         GameManager.instance.InitializeScore();
         GameManager.instance.StartCoroutine(GameManager.instance.CorLoadScene("MainMenu"));
     }
