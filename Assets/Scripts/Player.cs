@@ -314,7 +314,7 @@ public class Player : MonoBehaviour
         {
             if (GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
                 return;
-            StartCoroutine(GetDamage(3)); // 즉사
+            StartCoroutine(GetDamage(2)); // 데미지 2
         }
         else if (other.tag.Equals("Soldier")) // 병정들 맞았을 때
         {

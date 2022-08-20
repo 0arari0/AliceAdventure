@@ -80,12 +80,12 @@ TextureImporter:
       name: MIni_Card_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 58
+        width: 56
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -100,12 +100,12 @@ TextureImporter:
       name: MIni_Card_1
       rect:
         serializedVersion: 2
-        x: 62
+        x: 63
         y: 0
-        width: 58
+        width: 56
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -120,12 +120,12 @@ TextureImporter:
       name: MIni_Card_2
       rect:
         serializedVersion: 2
-        x: 124
+        x: 125
         y: 0
-        width: 58
+        width: 56
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: MIni_Card_3
       rect:
         serializedVersion: 2
-        x: 186
+        x: 187
         y: 0
-        width: 57
+        width: 56
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
