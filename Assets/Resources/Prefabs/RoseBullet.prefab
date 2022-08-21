@@ -134,7 +134,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 32, y: 28}
+    oldSize: {x: 34, y: 30}
     newSize: {x: 29, y: 32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
