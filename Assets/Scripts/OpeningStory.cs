@@ -31,8 +31,8 @@ public class OpeningStory : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (storyPicNum >= 5) return;
-        if (storyArrowNum >= 4) return;
+        if (storyPicNum >= storyImages.Length) return;
+        if (storyArrowNum >= storyArrows.Length) return;
         if (storyArrowNum == 1) skipButton.SetActive(true);
 
         if (storyImages[storyPicNum].color.a < 1)

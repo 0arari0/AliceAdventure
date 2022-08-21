@@ -11,13 +11,14 @@ public class Player : MonoBehaviour
 
     public static Player instance = null;
     const int lockPositionX = 280;
+    const int lockPositionY = 440;
     [SerializeField] GameObject attackPrefab; // 앨리스가 던지는 시계 투사체
     [SerializeField] float attackSpeed = 6f; // 앨리스의 이동속도, 공격속도(1초당 n회 공격)
     const float itemDuration = 4f;
     float speedUpDuration = 0;
     float damageUpDuration = 0;
-    //public bool shieldEnable = false;
     public GameObject itemShield;
+    public GameObject shieldClone;
 
     public bool isAlive { get; private set; }
     public bool isAttacked { get; private set; }
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour
     Coroutine _move = null; // 움직임 코루틴
     Coroutine _checkItemDuration = null; // 아이템 먹은 상태 체크 코루틴
 
+    Vector2 lastPosition; // 플레이어가 죽었을 때 마지막 위치
+
     public void Activate() // 플레이어 활성화
     {
         gameObject.SetActive(true);
@@ -57,9 +60,9 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && shieldClone == null)
         {
-            Instantiate(itemShield, transform.position, Quaternion.identity);
+            shieldClone = Instantiate(itemShield, transform.position, Quaternion.identity);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -96,6 +99,8 @@ public class Player : MonoBehaviour
         attackSpeed = 6f;
         rbMove.InitializeSpeed();
         playerDamage = 1;
+        shieldClone = null;
+        lastPosition = GetPosition();
 
         speedUpDuration = 0f;
         damageUpDuration = 0f;
@@ -143,24 +148,27 @@ public class Player : MonoBehaviour
         while (true)
         {
             // 좌우방향키를 입력하여 앨리스가 좌우로 이동
+            // 상하방향키 추가
             if (Input.GetKey(KeyCode.LeftArrow))
-            {
                 gameObject.transform.Translate(new Vector2(-1 * rbMove.GetSpeed() * Time.deltaTime, 0));
-            }
             if (Input.GetKey(KeyCode.RightArrow))
-            {
                 gameObject.transform.Translate(new Vector2(rbMove.GetSpeed() * Time.deltaTime, 0));
-            }
+            if (Input.GetKey(KeyCode.UpArrow))
+                gameObject.transform.Translate(new Vector2(0, rbMove.GetSpeed() * Time.deltaTime));
+            if (Input.GetKey(KeyCode.DownArrow))
+                gameObject.transform.Translate(new Vector2(0, -1 * rbMove.GetSpeed() * Time.deltaTime));
 
             // x좌표가 일정 범위를 벗어나면 다시 되돌아오게 함
-            if (rbMove.GetPosition().x > lockPositionX)
-            {
+            // y좌표가 일정 범위를 벗어나면 다시 되돌아오게 함
+            if (GetPosition().x > lockPositionX)
                 gameObject.transform.Translate(new Vector2(-1 * rbMove.GetSpeed() * Time.deltaTime, 0));
-            }
-            else if (rbMove.GetPosition().x < -1 * lockPositionX)
-            {
+            else if (GetPosition().x < -1 * lockPositionX)
                 gameObject.transform.Translate(new Vector2(rbMove.GetSpeed() * Time.deltaTime, 0));
-            }
+            else if (GetPosition().y > lockPositionY)
+                gameObject.transform.Translate(new Vector2(0, -1 * rbMove.GetSpeed() * Time.deltaTime));
+            else if (GetPosition().y < -1 * lockPositionY)
+                gameObject.transform.Translate(new Vector2(0, rbMove.GetSpeed() * Time.deltaTime));
+
             yield return null;
         }
     }
@@ -215,9 +223,7 @@ public class Player : MonoBehaviour
                 break;
             case Item.ItemType_.Shield: // 방어막 아이템 획득
                 if (GameObject.FindGameObjectsWithTag("Shield").Length == 0)
-                {
-                    Instantiate(itemShield, transform.position, Quaternion.identity);
-                }
+                    shieldClone = Instantiate(itemShield, transform.position, Quaternion.identity);
                 break;
         }
     }
@@ -271,6 +277,7 @@ public class Player : MonoBehaviour
         if (playerHp <= 0) // 플레이어 소멸
         {
             isAlive = false;
+            lastPosition = rbMove.GetPosition();
             animator.speed = 0f; // 애니메이션 중지
             ActStop(); // 플레이어 모든 행동 중지
             for (int i = 0; i < 50; i++) // 플레이어 점차 희미하게 사라짐
@@ -333,5 +340,28 @@ public class Player : MonoBehaviour
                 other.gameObject.GetComponent<SoldierInfo>().SoldierDead();
             }
         }
+        else if (other.tag.Equals("Enemy")) // 스페이드 기사단장, 하트여왕
+        {
+            if (GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
+                return;
+            StartCoroutine(GetDamage(1));
+        }
     }
+    void OnTriggerStay2D(Collider2D other) // 한 번에 죽지 않는 몹들 처리(플레이어와 몹이 겹쳐있을 때)
+    {
+        if (other.tag.Equals("Enemy")) // 스페이드 기사단장, 하트여왕
+        {
+            if (GameManager.instance.isClear) // 클리어 됐다면 플레이어는 무적
+                return;
+            StartCoroutine(GetDamage(1));
+        }
+    }
+
+    public Vector2 GetPosition()
+    {
+        if (!isAlive)
+            return lastPosition;
+        return rbMove.GetPosition();
+    }
+    public void SetPosition(Vector2 newPos) { rbMove.SetPosition(newPos); }
 }

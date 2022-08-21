@@ -16,7 +16,6 @@ public class OptionManager : MonoBehaviour
     public Text bgmValueText;
     public Slider sfxSlider;
     public Text sfxValueText;
-    bool isBattleScene = false;
 
     void Awake()
     {

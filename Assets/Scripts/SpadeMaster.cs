@@ -110,18 +110,25 @@ public class SpadeMaster : MonoBehaviour
 
     void ClearSpade()
     {
-        for(int i=0;i<GameObject.FindGameObjectsWithTag("SpadeBullet").Length;i++)
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("SpadeBullet").Length; i++)
         {
             Destroy(GameObject.FindGameObjectsWithTag("SpadeBullet")[i].gameObject);
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "PlayerAttack")
+        if (other.tag.Equals("PlayerAttack"))
         {
             StartCoroutine(GetDamage(other.gameObject.GetComponent<PlayerAttackPrefab>().Damage));
             Destroy(other.gameObject);
         }
+        else if (other.name.Equals("Shield"))
+            StartCoroutine(GetDamage(1));
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag.Equals("Player")) // 플레이어가 비비적거릴 때
+            StartCoroutine(GetDamage(1));
     }
 }

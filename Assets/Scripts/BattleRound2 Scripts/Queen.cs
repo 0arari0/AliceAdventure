@@ -106,13 +106,20 @@ public class Queen : MonoBehaviour, IMove
         isAttacked = false;
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "PlayerAttack")
         {
             StartCoroutine(GetDamage(other.gameObject.GetComponent<PlayerAttackPrefab>().Damage));
             Destroy(other.gameObject); // 플레이어 총알 파괴
         }
+        else if (other.name.Equals("Shield"))
+            StartCoroutine(GetDamage(1));
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag.Equals("Player")) // 플레이어가 비비적거릴 때
+            StartCoroutine(GetDamage(1));
     }
 
     /// <summary>

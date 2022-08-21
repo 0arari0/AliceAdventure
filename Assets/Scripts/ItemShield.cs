@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ItemShield : MonoBehaviour
 {
+    void Awake()
+    {
+        name = "Shield";
+    }
     void FixedUpdate()
     {
         transform.position = Player.instance.transform.position;
@@ -12,18 +16,25 @@ public class ItemShield : MonoBehaviour
     {
         if (other.tag.Equals("SpadeBullet"))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             Destroy(other.gameObject);
         }
         else if (other.tag.Equals("Soldier"))
         {
-            Destroy(this.gameObject);
-            other.GetComponent<CardSoldier>().SoldierDead();
+            Destroy(gameObject);
+            if (other.GetComponent<CardSoldier>() != null)
+                other.GetComponent<CardSoldier>().SoldierDead();
+            else if (other.GetComponent<SoldierInfo>() != null)
+                other.GetComponent<SoldierInfo>().SoldierDead();
         }
         else if (other.tag.Equals("QueenBullet"))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             ObjectPool.instance.ReturnQueenBullet(other.gameObject.GetComponent<RoseBullet>());
+        }
+        else if (other.tag.Equals("Enemy"))
+        {
+            Destroy(gameObject);
         }
     }
 }

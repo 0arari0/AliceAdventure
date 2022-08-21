@@ -38,7 +38,7 @@ public class RigidBody2DMove : MonoBehaviour
     }
 
     public Vector2 GetPosition() { return _rb.position; }
-    public void SetPosition(Vector2 pos) { _rb.position = pos; }
+    public void SetPosition(Vector2 newPos) { _rb.position = newPos; }
     public float GetSpeed() { return speed; }
     public void SetSpeed(float speed) { this.speed = speed; }
     public void AddSpeed(float speed)

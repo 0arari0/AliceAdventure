@@ -19,7 +19,6 @@ public class CardSoldier : MonoBehaviour
     [SerializeField] GameObject damageUpItem;
     [SerializeField] GameObject shieldItem;
     Vector3 playerPosition;
-    bool catchPlayerPosition = false;
     public bool isAttacked = false;
     public GameObject attackedWhite;
 
@@ -89,10 +88,9 @@ public class CardSoldier : MonoBehaviour
                 }
                 break;
             case SoldierType_.Heart:
-                playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+                playerPosition = Player.instance.GetPosition();
                 transform.Translate(new Vector2((playerPosition - transform.position).normalized.x * Time.deltaTime * moveSpeedX, -1 * Time.deltaTime * moveSpeed));
                 break;
-
             case SoldierType_.Diamond:
             case SoldierType_.Clover:
                 transform.Translate(new Vector2(0, -1 * moveSpeed * Time.deltaTime));
