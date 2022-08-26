@@ -94,6 +94,8 @@ public class Queen : MonoBehaviour, IMove
                 spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
                 yield return null;
             }
+            Ending ending = buildBattleRound2.ending.GetComponent<Ending>();
+            yield return ending.StartCoroutine(ending.EndingStart());
             scriptUI.SetActiveOnPanelWin();
             Player.instance.Deactivate();
             Destroy(gameObject); // 여왕 파괴

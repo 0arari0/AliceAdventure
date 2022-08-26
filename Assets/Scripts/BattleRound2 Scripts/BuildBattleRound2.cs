@@ -25,10 +25,13 @@ public class BuildBattleRound2 : MonoBehaviour
     float soilderEmergeTimeAfterQueen; // 여왕 등장 후 해당 시간이 지나면 병정 등장
 
     BattleRoundUI battleRoundUI;
+    public GameObject ending; // ending 전체 게임 오브젝트
+    Ending endingScript;
 
     void Awake()
     {
         battleRoundUI = Camera.main.GetComponent<BattleRoundUI>();
+        endingScript = ending.GetComponent<Ending>();
     }
     IEnumerator Start()
     {

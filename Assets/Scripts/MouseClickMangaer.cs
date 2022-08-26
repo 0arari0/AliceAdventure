@@ -13,6 +13,7 @@ public class MouseClickMangaer : MonoBehaviour
         if (instance != null)
         {
             Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);

@@ -301,6 +301,15 @@ public class Player : MonoBehaviour
         ActStop();
         battleRoundUI.SetActiveOnPanelGameover();
     }
+    public IEnumerator FadeOut()
+    {
+        for (float i = 1f; i >= 0f; i -= 0.01f)
+        {
+            spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, i);
+            yield return null;
+        }
+        Deactivate();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
