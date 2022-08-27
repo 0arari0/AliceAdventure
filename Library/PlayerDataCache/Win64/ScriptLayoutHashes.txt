@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/nada9/Downloads/SiMaEl Ver1.5/SiMaEl.exe
+C:/Users/siggn/Desktop/AliceAdventure v1.62/SiMaEl.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/OpeningStory.unity
@@ -107,7 +107,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.P
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 4e9333594897a1fb8b136ad2eae996c7 Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 86011b7837be0353703556e001edce8b Assembly-CSharp.dll:.QueenAttack
-8aa8f8c9537bac16ed124fb38b8e6c15 Assembly-CSharp.dll:.Player
+9a8ac3594a100018194848035c04e97f Assembly-CSharp.dll:.Player
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -127,10 +127,13 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 306a0cccfb313ccd8d90fe5e07d6e054 Assembly-CSharp.dll:.QueenSoilderSpawner
 40d07fc273fc4d3366d8a72f356411e6 Assembly-CSharp.dll:.PlayerAttackPrefab
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BubbleController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.QueenSound
 a4f893e4e1de92eb846c16fb18043228 Assembly-CSharp.dll:.BigSpadeBullet1
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ItemShield
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Singleton
+459b50185a167c1d210a783633c72823 Assembly-CSharp.dll:.MouseClickParticle
+b987712752da5a8fcdc8303c316b153c Assembly-CSharp.dll:.Ending
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 cd15d830f3d775f1f16a1a350fbbe607 Assembly-CSharp.dll:.RoseBullet
 3a960223c337dc7b13fd6923520f5720 Assembly-CSharp.dll:.BattleRound1_SpawnManager
@@ -152,12 +155,15 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 ff04e4b4676f1d87a8ae7107638135f1 Assembly-CSharp.dll:.CheckBossTime
+edfa00e6bb8869f0e84cd03bf4c378f3 Assembly-CSharp.dll:.AliceController
+afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.TransformMove
 be834aed64c3cd7c7a259c96f7d75ce6 Assembly-CSharp.dll:.SoldierInfo
-38ed65fa476dd605fb9590bb21050068 Assembly-CSharp.dll:.BuildBattleRound2
+3463ab670701429215ddc7da169de16e Assembly-CSharp.dll:.BuildBattleRound2
 a9f049c3dc82bb36fdb142e4d6a2658d Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 c37993c7aaa3b734f85fc965624425e8 Assembly-CSharp.dll:.BGRolling
 afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.RigidBody2DMove
+3a5aeb7bd28b4f706d831b521e52d745 Assembly-CSharp.dll:.OpeningStory
 83e769eee07fc231384c812eedbb8224 Assembly-CSharp.dll:.PlayerParent
 88cc9df3c6fc697bfbeacd24c0d6f2d7 UnityEngine.TestRunner.dll:UnityEngine.TestTools.BeforeAfterTestCommandState
 88cc9df3c6fc697bfbeacd24c0d6f2d7 UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
@@ -169,6 +175,7 @@ afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.RigidBody2DMove
 fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
+b4e2273de058b6ede26924348c2790aa Assembly-CSharp.dll:.SpadeMasterHpBar
 13e8abeb132f6be5d1c466979e3bfb9f Assembly-CSharp.dll:.QueenSoilderMove
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.SetResolutionTest
 931f489e44eadf809e9310429c99dde5 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
@@ -176,9 +183,11 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
+94b4fb74c7f8ad8d71b2fb46fb5ed4f9 Assembly-CSharp.dll:.RabbitController
 3c7f94c10aaf891dbef3891df979732b Assembly-CSharp.dll:.ScoreAndHeart
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MouseClickMangaer
 459b50185a167c1d210a783633c72823 Assembly-CSharp.dll:.SmallSpadeBullet
 ef255942c35b8c51332191069b18f785 Assembly-CSharp.dll:.BuildBattleRound1
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
@@ -193,9 +202,6 @@ afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.RectTransformMove
 226638fcb8a0d6f04e76c464af1270a5 Assembly-CSharp.dll:.OptionManager
 7840b05889bb0110e6f449b9224f50e7 Assembly-CSharp.dll:.GameManager
 86fdb96d8d2cf1568926e0aa6d2e6ff8 Assembly-CSharp.dll:.MainMenuCloud
-26260e6ff15dc4d1e317bf6e079faa27 Assembly-CSharp.dll:.BattleRoundUI
+962a41ea2fd280fc9aa2f696c8c01bfb Assembly-CSharp.dll:.BattleRoundUI
 9f14c0c98a4ddaf21a7e24c715a7c15f Assembly-CSharp.dll:.SoundManager
 179414a3220a36afe9b06860c5f024c2 Assembly-CSharp.dll:.SpadeMaster
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.QueenSound
-b4e2273de058b6ede26924348c2790aa Assembly-CSharp.dll:.SpadeMasterHpBar
-3a5aeb7bd28b4f706d831b521e52d745 Assembly-CSharp.dll:.OpeningStory
