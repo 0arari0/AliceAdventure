@@ -29,7 +29,7 @@ public class MainMenuButton : MonoBehaviour
         gameStartButton.GetComponent<Button>().enabled = false;
         Time.timeScale = 1f;
         SoundManager.instance.bgmPlayer.Stop();
-        GameManager.instance.LoadNextScene();
+        GameManager.instance.LoadScene("BattleRound2");
     }
 
     public void SelectHowPlayButton()

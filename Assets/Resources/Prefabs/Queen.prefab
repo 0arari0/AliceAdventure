@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enterStartPos: {x: 0, y: 570}
   enterEndPos: {x: 0, y: 400}
-  maxHp: 150
+  maxHp: 30
   movingIntervalTime: 1
   movingIntervalTimeErrorPercent: 50
 --- !u!114 &5473766323525929095

@@ -53,8 +53,11 @@ public class Ending : MonoBehaviour
         yield return new WaitForSeconds(2f);
         SoundManager.instance.StopBGM();
 
+        // 화면 검게 변함
         // 플레이어 앨리스 비활성화
+        yield return battleRoundUI.StartCoroutine(battleRoundUI.BlackOn());
         Player.instance.Deactivate();
+        yield return battleRoundUI.StartCoroutine(battleRoundUI.BlackOff());
 
         // 그림 앨리스 등장
         aliceController.transformMove.SetPosition(new Vector2(0f, -100f));
@@ -67,9 +70,11 @@ public class Ending : MonoBehaviour
         Vector2 endPos = new Vector2(0f, 0f);
         yield return rabbitController.transformMove.StartCoroutine(rabbitController.transformMove.MoveStart(startPos, endPos));
 
-        // 1.5초 뒤에 앨리스와 토끼 빵끗 웃음
-        yield return new WaitForSeconds(1.5f);
+        // 1초 뒤에 앨리스 웃음
+        // 1초 뒤에 토끼 웃음
+        yield return new WaitForSeconds(1f);
         aliceController.bubbleController.BubbleOn();
+        yield return new WaitForSeconds(1.5f);
         rabbitController.bubbleController.BubbleOn();
 
         // 2초 기다린 뒤 win panel 등장

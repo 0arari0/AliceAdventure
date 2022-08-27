@@ -31,25 +31,21 @@ public class OpeningStory : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (storyPicNum >= storyImages.Length) return;
-        if (storyArrowNum >= storyArrows.Length) return;
         if (storyArrowNum == 1) skipButton.SetActive(true);
 
-        if (storyImages[storyPicNum].color.a < 1)
+        if (storyPicNum < storyImages.Length)
         {
-            storyImages[storyPicNum].color = new Color(1, 1, 1, storyImages[storyPicNum].color.a + Time.deltaTime * (1f / nextTime));
+            if (storyImages[storyPicNum].color.a < 1)
+                storyImages[storyPicNum].color = new Color(1, 1, 1, storyImages[storyPicNum].color.a + Time.deltaTime * (1f / nextTime));
+            if (storyImages[storyPicNum].color.a >= 1)
+                storyPicNum++;
         }
-        if (storyArrows[storyArrowNum].color.a < 1)
+        if (storyArrowNum < storyArrows.Length)
         {
-            storyArrows[storyArrowNum].color = new Color(1, 1, 1, storyArrows[storyArrowNum].color.a + Time.deltaTime * (1f / nextTime));
-        }
-        if (storyImages[storyPicNum].color.a >= 1)
-        {
-            storyPicNum++;
-        }
-        if (storyArrows[storyArrowNum].color.a >= 1)
-        {
-            storyArrowNum++;
+            if (storyArrows[storyArrowNum].color.a < 1)
+                storyArrows[storyArrowNum].color = new Color(1, 1, 1, storyArrows[storyArrowNum].color.a + Time.deltaTime * (1f / nextTime));
+            if (storyArrows[storyArrowNum].color.a >= 1)
+                storyArrowNum++;
         }
     }
 }

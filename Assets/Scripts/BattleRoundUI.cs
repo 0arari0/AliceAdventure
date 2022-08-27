@@ -16,6 +16,8 @@ public class BattleRoundUI : MonoBehaviour
     GameObject panelGameover;
     [SerializeField]
     GameObject panelWin;
+    [SerializeField]
+    Image black;
 
     void Awake()
     {
@@ -101,6 +103,23 @@ public class BattleRoundUI : MonoBehaviour
         panelWin.SetActive(true);
         if (panelGameover.activeSelf)
             panelGameover.SetActive(false);
+    }
+
+    public IEnumerator BlackOn()
+    {
+        for (float i = 0f; i <= 1f; i += 0.02f)
+        {
+            black.color = new Color(0f, 0f, 0f, i);
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+    public IEnumerator BlackOff()
+    {
+        for (float i = 1f; i >= 0f; i -= 0.02f)
+        {
+            black.color = new Color(0f, 0f, 0f, i);
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 
     public void Warning()
