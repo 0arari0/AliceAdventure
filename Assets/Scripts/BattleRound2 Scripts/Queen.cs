@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Queen : MonoBehaviour, IMove
@@ -14,7 +15,7 @@ public class Queen : MonoBehaviour, IMove
     QueenAttack scriptQueenAttack;
     SpriteRenderer spriteRenderer;
     BuildBattleRound2 buildBattleRound2;
-    BattleRoundUI scriptUI;
+    Ending ending;
     Animator animator;
 
     Coroutine corMovePattern; // 움직임 전체 코루틴
@@ -52,7 +53,7 @@ public class Queen : MonoBehaviour, IMove
         scriptQueenAttack = GetComponent<QueenAttack>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         buildBattleRound2 = Camera.main.GetComponent<BuildBattleRound2>();
-        scriptUI = Camera.main.GetComponent<BattleRoundUI>();
+        ending = Camera.main.GetComponent<Ending>();
         animator = GetComponent<Animator>();
     }
     void OnEnable()
@@ -82,6 +83,7 @@ public class Queen : MonoBehaviour, IMove
         {
             isAlive = false;
             GameManager.instance.isClear = true;
+            GameManager.instance.isAllClear = true;
             GameManager.instance.AddScore(score);
             SoundManager.instance.PlaySfx(SoundManager.SFX_Name_.EnemyDead);
             animator.speed = 0f; // 애니메이션 중지
@@ -94,10 +96,7 @@ public class Queen : MonoBehaviour, IMove
                 spriteRenderer.color = new Color(colorOrigin.r, colorOrigin.g, colorOrigin.b, 1f - 0.02f * i);
                 yield return null;
             }
-            Ending ending = buildBattleRound2.ending.GetComponent<Ending>();
-            yield return ending.StartCoroutine(ending.EndingStart());
-            scriptUI.SetActiveOnPanelWin();
-            Player.instance.Deactivate();
+            ending.EndingStart();
             Destroy(gameObject); // 여왕 파괴
             yield break;
         }

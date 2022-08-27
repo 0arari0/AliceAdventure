@@ -20,8 +20,8 @@ public class TransformMove : MonoBehaviour
     public IEnumerator MoveStart(Vector2 startPos, Vector2 endPos)
     {
         _isMove = true;
+        
         _transform.position = startPos;
-
         while ((Vector2)_transform.position != endPos)
         {
             _transform.position = Vector2.MoveTowards(_transform.position, endPos, speed * Time.deltaTime);

@@ -22,6 +22,7 @@ public class SoldierInfo : MonoBehaviour
     GameObject attackedWhite;
 
     RigidBody2DMove rbMove;
+    BuildBattleRound2 buildBattleRound2;
 
     public bool isAlive { get; private set; } = true;
     public bool isAttacked { get; private set; } = false;
@@ -29,17 +30,15 @@ public class SoldierInfo : MonoBehaviour
     void Awake()
     {
         rbMove = GetComponent<RigidBody2DMove>();
-        if (maxHp <= 0)
-        {
-            maxHp = 3;
-        }
+        buildBattleRound2 = Camera.main.GetComponent<BuildBattleRound2>();
+
+        if (maxHp <= 0) maxHp = 3;
         curHp = maxHp;
-        if (score < 0)
-            score = 100;
+        if (score < 0) score = 100;
     }
     void Update()
     {
-        if (!isAlive)
+        if (!isAlive || !buildBattleRound2.queen.isAlive)
         {
             rbMove.SetSpeed(0f);
             GetComponent<BoxCollider2D>().enabled = false;

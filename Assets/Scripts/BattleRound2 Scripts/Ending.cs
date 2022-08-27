@@ -5,43 +5,77 @@ using UnityEngine;
 public class Ending : MonoBehaviour
 {
     [SerializeField]
-    GameObject rabbit;
+    RabbitController rabbitController;
     [SerializeField]
-    GameObject alice;
+    AliceController aliceController;
     [SerializeField]
-    GameObject rabbitSmile;
+    QueenSoilderSpawner leftSoldierSpawner;
     [SerializeField]
-    GameObject aliceSmile;
+    QueenSoilderSpawner rightSoldierSpawner;
+    [SerializeField]
+    BattleRoundUI battleRoundUI;
 
-    TransformMove _rabbitMove;
-    TransformMove _aliceMove;
+    public bool isProceeding { get; private set; } = false; // 엔딩이 진행 중인지
 
-    SpriteRenderer aliceSpriteRenderer;
-    Color aliceColor;
+    Coroutine _endingStart = null;
 
-    void Awake()
+    /// <summary>
+    /// 단순 호출로 실행
+    /// </summary>
+    public void EndingStart()
     {
-        aliceColor = alice.GetComponent<SpriteRenderer>().color;
-        aliceSpriteRenderer = alice.GetComponent<SpriteRenderer>();
-        
-        _rabbitMove = rabbit.GetComponent<TransformMove>();
-        _aliceMove = rabbit.GetComponent<TransformMove>();
+        if (_endingStart == null && !isProceeding)
+            _endingStart = StartCoroutine(CEndingStart());
+    }
+    public void EndingStop()
+    {
+        if (_endingStart != null)
+        {
+            StopCoroutine(_endingStart);
+            _endingStart = null;
+            isProceeding = false;
+        }
     }
 
-    public IEnumerator EndingStart()
+    /// <summary>
+    /// IEnumerator로 실행
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator CEndingStart()
     {
-        Vector2 lastPosition = Player.instance.GetPosition();
-        yield return Player.instance.StartCoroutine(Player.instance.FadeOut());
+        if (isProceeding) yield break;
+        isProceeding = true;
 
-        _aliceMove.SetPosition(new Vector2(0, 450f)); // 앨리스 위치 설정
-        for (float i = 0f; i <= 1f; i += 0.01f) // fade in
-        {
-            aliceSpriteRenderer.color = new Color(aliceColor.r, aliceColor.g, aliceColor.b, i);
-            yield return null;
-        }
+        // 플레이어 앨리스 중지
+        // 총알들이나 병정들이 사라질 때까지 잠시 기다림
+        // 긴박한 BGM 중지
+        Player.instance.ActStop();
+        yield return new WaitForSeconds(2f);
+        SoundManager.instance.StopBGM();
 
-        _rabbitMove.StartCoroutine(_rabbitMove.MoveStart(new Vector2(0, 1200f), new Vector2(0, 550f)));
+        // 플레이어 앨리스 비활성화
+        Player.instance.Deactivate();
 
+        // 그림 앨리스 등장
+        aliceController.transformMove.SetPosition(new Vector2(0f, -100f));
+        yield return aliceController.StartCoroutine(aliceController.CFadeIn());
 
+        // 화면 위에서 토끼 걸어나옴
+        // bgm 전환
+        SoundManager.instance.PlayBgm(SoundManager.BGM_Name_.Ending);
+        Vector2 startPos = rabbitController.transformMove.GetPosition();
+        Vector2 endPos = new Vector2(0f, 0f);
+        yield return rabbitController.transformMove.StartCoroutine(rabbitController.transformMove.MoveStart(startPos, endPos));
+
+        // 1.5초 뒤에 앨리스와 토끼 빵끗 웃음
+        yield return new WaitForSeconds(1.5f);
+        aliceController.bubbleController.BubbleOn();
+        rabbitController.bubbleController.BubbleOn();
+
+        // 2초 기다린 뒤 win panel 등장
+        yield return new WaitForSeconds(2f);
+        battleRoundUI.SetActiveOnPanelWin();
+
+        isProceeding = false;
     }
 }

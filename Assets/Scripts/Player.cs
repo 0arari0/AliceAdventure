@@ -40,8 +40,6 @@ public class Player : MonoBehaviour
     Coroutine _move = null; // 움직임 코루틴
     Coroutine _checkItemDuration = null; // 아이템 먹은 상태 체크 코루틴
 
-    Vector2 lastPosition; // 플레이어가 죽었을 때 마지막 위치
-
     public void Activate() // 플레이어 활성화
     {
         gameObject.SetActive(true);
@@ -49,8 +47,10 @@ public class Player : MonoBehaviour
     }
     public void Deactivate() // 플레이어 비활성화
     {
-        gameObject.SetActive(false);
+        ActStop();
+        if (shieldClone != null) Destroy(shieldClone);
         battleRoundUI = null;
+        gameObject.SetActive(false);
     }
     public void SetScript(BattleRoundUI battleRoundUI) // battleRoundUI만 배틀 중일 때 따로 저장
     {
@@ -60,18 +60,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.instance.isAllClear) return; // 게임을 클리어했으면 더 이상 치트 안먹힘
+
         if (Input.GetKeyDown(KeyCode.A) && shieldClone == null)
-        {
             shieldClone = Instantiate(itemShield, transform.position, Quaternion.identity);
-        }
         if (Input.GetKeyDown(KeyCode.S))
-        {
             damageUpDuration = 4f;
-        }
         if (Input.GetKeyDown(KeyCode.D))
-        {
             speedUpDuration = 4f;
-        }
     }
 
     void Awake()
@@ -100,7 +96,6 @@ public class Player : MonoBehaviour
         rbMove.InitializeSpeed();
         playerDamage = 1;
         shieldClone = null;
-        lastPosition = GetPosition();
 
         speedUpDuration = 0f;
         damageUpDuration = 0f;
@@ -108,7 +103,7 @@ public class Player : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 1);
         colorOrigin = spriteRenderer.color;
         colorAttacked = new Color(1f, 0.5f, 0.5f);
-        animator.speed = 1f;
+        AnimationStart();
 
         StartCoroutine(_Start());
     }
@@ -130,15 +125,19 @@ public class Player : MonoBehaviour
         AttackStop();
         CheckItemDurationStop();
     }
-    public void MoveStart()
+    public void MoveStart(float animationSpeed = 1f)
     {
         if (_move == null)
+        {
+            AnimationStart(animationSpeed);
             _move = StartCoroutine(_Move());
+        }
     }
     public void MoveStop()
     {
         if (_move != null)
         {
+            AnimationStop();
             StopCoroutine(_move);
             _move = null;
         }
@@ -269,6 +268,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AnimationStart(float animationSpeed = 1f) { animator.speed = animationSpeed; }
+    public void AnimationStop() { animator.speed = 0f; }
+
     public IEnumerator GetDamage(int damage) // 여왕이랑 같은 매커니즘
     {
         if (isAttacked) yield break; // 공격 받는 동안은 무적
@@ -277,8 +279,6 @@ public class Player : MonoBehaviour
         if (playerHp <= 0) // 플레이어 소멸
         {
             isAlive = false;
-            lastPosition = rbMove.GetPosition();
-            animator.speed = 0f; // 애니메이션 중지
             ActStop(); // 플레이어 모든 행동 중지
             for (int i = 0; i < 50; i++) // 플레이어 점차 희미하게 사라짐
             {
@@ -297,7 +297,6 @@ public class Player : MonoBehaviour
 
     public void PlayerGameOver()
     {
-        animator.speed = 0f;
         ActStop();
         battleRoundUI.SetActiveOnPanelGameover();
     }
@@ -366,11 +365,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public Vector2 GetPosition()
-    {
-        if (!isAlive)
-            return lastPosition;
-        return rbMove.GetPosition();
-    }
+    public Vector2 GetPosition() { return rbMove.GetPosition(); }
     public void SetPosition(Vector2 newPos) { rbMove.SetPosition(newPos); }
 }

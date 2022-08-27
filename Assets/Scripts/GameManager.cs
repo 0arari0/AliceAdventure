@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int stageScore { get; private set; }
 
     public bool isClear { get; set; } // 해당 Scene을 클리어했는가?
+    public bool isAllClear { get; set; } // 최종 보스를 잡아 모든 Scene이 클리어 됐는가?
 
     StripeFade stripeFade;
 
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         _curSceneIdx = 0;
 
         isClear = false;
+        isAllClear = false;
         InitializeScore();
 
         stripeFade = StripeFade.instance;
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(name);
         _curSceneIdx = _numberOfScene[name];
         isClear = false;
+        if (name == "MainMenu") isAllClear = false;
 
         yield return stripeFade.StartCoroutine(stripeFade.FadeIn());
     }
@@ -79,6 +82,7 @@ public class GameManager : MonoBehaviour
         }
         SceneManager.LoadScene(sceneNames[_curSceneIdx]);
         isClear = false;
+        if (sceneNames[_curSceneIdx] == "MainMenu") isAllClear = false;
 
         yield return stripeFade.StartCoroutine(stripeFade.FadeIn());
     }

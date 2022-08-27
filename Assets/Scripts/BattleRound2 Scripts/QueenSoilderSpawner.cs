@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static QueenSoilderMove;
 
 public class QueenSoilderSpawner : MonoBehaviour
 {
@@ -28,8 +27,8 @@ public class QueenSoilderSpawner : MonoBehaviour
             Shuffle();
             for (int i = 0; i < spawns.Length; i++)
             {
-                GameObject objClone = Instantiate(soilderPrefabs[i]);
-                objClone.GetComponent<RigidBody2DMove>().SetPosition(spawns[i].transform.position);
+                GameObject soldierClone = Instantiate(soilderPrefabs[i], transform);
+                soldierClone.GetComponent<RigidBody2DMove>().SetPosition(spawns[i].transform.position);
             }
             yield return new WaitForSeconds(emergeIntervalTime);
         }

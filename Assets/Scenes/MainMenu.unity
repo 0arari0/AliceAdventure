@@ -273,6 +273,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0e090abbaf87c8f4ab0b28bfd07bedc3, type: 3}
   - {fileID: 8300000, guid: 1f2ad3258f2bf2b4c9cf8c76ec8a010a, type: 3}
   - {fileID: 8300000, guid: 68ec09b937c0cf246b6b27c2994b090c, type: 3}
+  - {fileID: 8300000, guid: 72bb7cbeb2742f846bc7d891f61826f8, type: 3}
   sfxArr:
   - {fileID: 8300000, guid: da3d83f77c142944a936ad943c4acfe0, type: 3}
   - {fileID: 8300000, guid: 9b848aea225e6e940b99e78f3bd6a811, type: 3}
