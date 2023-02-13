@@ -1606,6 +1606,7 @@ MonoBehaviour:
   warningUIs: {fileID: 0}
   panelGameover: {fileID: 68689151}
   panelWin: {fileID: 0}
+  black: {fileID: 0}
 --- !u!114 &760960179
 MonoBehaviour:
   m_ObjectHideFlags: 0

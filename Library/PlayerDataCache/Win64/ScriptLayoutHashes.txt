@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-D:/UnityBuildFiles/SiMaEl.exe
+D:/Unity/Build Files/AliceAdventure/SiMaEl.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/OpeningStory.unity

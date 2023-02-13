@@ -26,6 +26,7 @@ public class SpadeMasterHpBar : MonoBehaviour
         }
         else
         {
+            hpBackground.SetActive(false);
             spadeMaster = GameObject.FindGameObjectWithTag("Enemy");
         }
     }
